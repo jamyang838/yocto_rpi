@@ -489,3 +489,7 @@ Running command ['setEventMask', 1, 20, {'BitBake.SigGen.HashEquiv': 19, 'BitBak
 Running command ['getVariable', 'BB_DEFAULT_TASK']
 Running command ['setConfig', 'cmd', 'build']
 Running command ['buildTargets', ['example-image'], 'build']
+Processing Client
+Disconnecting Client
+No timeout, exiting.
+Exiting
