@@ -16,7 +16,8 @@ IMAGE_FEATURES += "ssh-server-dropbear"
 IMAGE_INSTALL += "linux-firmware linux-firmware-bcm43430"
 IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "qtquickcontrols2"
-IMAGE_INSTALL += "qtquickcontrols"
+#IMAGE_INSTALL += "qtquickcontrols"
+IMAGE_INSTALL += "wiringpi"
 
 #IMAGE_FSTYPES += "tar.xz ext3 rpi-sdimg"
 #add package managment
