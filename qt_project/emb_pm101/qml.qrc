@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/pic">
+        <file alias="frame.png">resources/Download-Vector-Frame-PNG.png</file>
+    </qresource>
+</RCC>
