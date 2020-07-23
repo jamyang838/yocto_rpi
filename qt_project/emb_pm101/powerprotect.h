@@ -3,7 +3,13 @@
 
 #include <QObject>
 #include <QTimer>
+#include <string.h>
+#include <ctime>
+#include <QDebug>
+#include <wiringPi.h>
 #include <wiringSerial.h>
+
+#define PIN_RELAY   25
 
 class Powerprotect : public QObject
 {
@@ -19,6 +25,7 @@ QString power_display() const;
 
 public slots:
 void setPower_display(QString power_display);
+void switch1_slot(bool val);
 
 signals:
 

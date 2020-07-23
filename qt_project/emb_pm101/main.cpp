@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     Powerprotect powerprotect;
     //test***************************
+    engine.rootContext()->setContextProperty("pp", &powerprotect);
     engine.rootContext()->setContextObject(&powerprotect);
     //test***************************
 

@@ -1,11 +1,21 @@
 #include "powerprotect.h"
-#include <string.h>
-#include <ctime>
-#include <QDebug>
+
+
 
 Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
     m_timer(new QTimer(this))
 {
+    //Pin*******************************************************
+    wiringPiSetup();
+    pinMode(PIN_RELAY ,OUTPUT);
+    while(true)
+    {
+        digitalWrite(PIN_RELAY,1);
+        delay(2000);
+        digitalWrite(PIN_RELAY,0);
+        delay(2000);
+    }
+    //**********************************************************
     //fd = serialOpen ("/dev/serial0", 115200);
     fd = serialOpen ("/dev/ttyUSB0", 115200);
     connect(m_timer,&QTimer::timeout,[=](){
@@ -38,6 +48,11 @@ void Powerprotect::setPower_display(QString power_display)
 
     m_power_display = power_display;
     emit power_displayChanged(m_power_display);
+}
+
+void Powerprotect::switch1_slot(bool val)
+{
+    qDebug() << val;
 }
 
 QString Powerprotect::UART_Qeury(QString command)
