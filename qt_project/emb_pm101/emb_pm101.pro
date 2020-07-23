@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        powerprotect.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,4 +37,7 @@ else:unix: LIBS += -L$$PWD/../../../opt/example-distro/sdkversion/sysroots/corte
 
 INCLUDEPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include
 DEPENDPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include
+
+HEADERS += \
+    powerprotect.h
 

@@ -5,4 +5,7 @@
     <qresource prefix="/pic">
         <file alias="frame.png">resources/Download-Vector-Frame-PNG.png</file>
     </qresource>
+    <qresource prefix="/font">
+        <file alias="font1.ttf">resources/font/AnjaliOldLipi.ttf</file>
+    </qresource>
 </RCC>

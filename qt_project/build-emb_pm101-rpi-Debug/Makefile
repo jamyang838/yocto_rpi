@@ -50,9 +50,13 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../emb_pm101/main.cpp qrc_qml.cpp
+SOURCES       = ../emb_pm101/main.cpp \
+		../emb_pm101/powerprotect.cpp qrc_qml.cpp \
+		moc_powerprotect.cpp
 OBJECTS       = main.o \
-		qrc_qml.o
+		powerprotect.o \
+		qrc_qml.o \
+		moc_powerprotect.o
 DIST          = /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/spec_pre.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/common/unix.conf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/common/linux.conf \
@@ -219,7 +223,8 @@ DIST          = /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-po
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/exceptions.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/yacc.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/lex.prf \
-		../emb_pm101/emb_pm101.pro  ../emb_pm101/main.cpp
+		../emb_pm101/emb_pm101.pro ../emb_pm101/powerprotect.h ../emb_pm101/main.cpp \
+		../emb_pm101/powerprotect.cpp
 QMAKE_TARGET  = emb_pm101
 DESTDIR       = 
 TARGET        = emb_pm101
@@ -596,7 +601,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../emb_pm101/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_pm101/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/powerprotect.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/main.cpp ../emb_pm101/powerprotect.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -626,7 +632,8 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../emb_pm101/qml.qrc \
 		/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/rcc \
 		../emb_pm101/main.qml \
-		../emb_pm101/resources/Download-Vector-Frame-PNG.png
+		../emb_pm101/resources/Download-Vector-Frame-PNG.png \
+		../emb_pm101/resources/font/AnjaliOldLipi.ttf
 	/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/rcc -name qml ../emb_pm101/qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -635,8 +642,14 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp
 	arm-poky-linux-gnueabi-g++ -march=armv7ve -marm -mfpu=neon-vfpv4 -mfloat-abi=hard -mcpu=cortex-a7 -pipe --sysroot=/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_powerprotect.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_powerprotect.cpp
+moc_powerprotect.cpp: ../emb_pm101/powerprotect.h \
+		moc_predefs.h \
+		/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc
+	/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc $(DEFINES) --include ./moc_predefs.h -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/linux-oe-g++ -I/home/yang/yocto/m2_poky/qt_project/emb_pm101 -I/home/yang/yocto/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuickControls2 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuick -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtGui -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQml -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtNetwork -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtCore -I. -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/arm-poky-linux-gnueabi -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/backward -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include-fixed -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include ../emb_pm101/powerprotect.h -o moc_powerprotect.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -647,15 +660,21 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
-main.o: ../emb_pm101/main.cpp 
+main.o: ../emb_pm101/main.cpp ../emb_pm101/powerprotect.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../emb_pm101/main.cpp
+
+powerprotect.o: ../emb_pm101/powerprotect.cpp ../emb_pm101/powerprotect.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o powerprotect.o ../emb_pm101/powerprotect.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
+
+moc_powerprotect.o: moc_powerprotect.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_powerprotect.o moc_powerprotect.cpp
 
 ####### Install
 
