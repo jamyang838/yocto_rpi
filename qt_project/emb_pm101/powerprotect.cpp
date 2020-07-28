@@ -1,20 +1,17 @@
 #include "powerprotect.h"
-
+#include "htmltitle.h"
 
 
 Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
     m_timer(new QTimer(this))
 {
+
+    //Curl******************************************************
+
+
     //Pin*******************************************************
     wiringPiSetup();
-    pinMode(PIN_RELAY ,OUTPUT);
-    while(true)
-    {
-        digitalWrite(PIN_RELAY,1);
-        delay(2000);
-        digitalWrite(PIN_RELAY,0);
-        delay(2000);
-    }
+    pinMode(PIN_RELAY ,OUTPUT);    
     //**********************************************************
     //fd = serialOpen ("/dev/serial0", 115200);
     fd = serialOpen ("/dev/ttyUSB0", 115200);
@@ -53,6 +50,19 @@ void Powerprotect::setPower_display(QString power_display)
 void Powerprotect::switch1_slot(bool val)
 {
     qDebug() << val;
+    int _value;
+    if(val)
+        _value = 1;
+    else
+        _value = 0;
+    digitalWrite(PIN_RELAY,_value);
+
+}
+
+void Powerprotect::input_number(QString str)
+{
+    qDebug() << str;
+
 }
 
 QString Powerprotect::UART_Qeury(QString command)

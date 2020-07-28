@@ -16,6 +16,8 @@ IMAGE_FEATURES += "ssh-server-dropbear"
 IMAGE_INSTALL += "linux-firmware linux-firmware-bcm43430"
 IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "qtquickcontrols2"
+IMAGE_INSTALL += "qtvirtualkeyboard"
+
 #IMAGE_INSTALL += "qtquickcontrols"
 IMAGE_INSTALL += "wiringpi"
 
@@ -38,6 +40,9 @@ IMAGE_INSTALL += "networkmanager \
  networkmanager-nmtui \
  networkmanager-bash-completion \
  "
+#INSTALL 
+IMAGE_INSTALL += "curl"
+
 #
 #install app 
 #IMAGE_INSTALL += "hello-world-cpp-sources"

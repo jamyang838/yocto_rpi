@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Powerprotect_t {
-    QByteArrayData data[7];
-    char stringdata0[83];
+    QByteArrayData data[9];
+    char stringdata0[100];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,14 @@ QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 13), // "power_display"
 QT_MOC_LITERAL(4, 49, 16), // "setPower_display"
 QT_MOC_LITERAL(5, 66, 12), // "switch1_slot"
-QT_MOC_LITERAL(6, 79, 3) // "val"
+QT_MOC_LITERAL(6, 79, 3), // "val"
+QT_MOC_LITERAL(7, 83, 12), // "input_number"
+QT_MOC_LITERAL(8, 96, 3) // "str"
 
     },
     "Powerprotect\0power_displayChanged\0\0"
     "power_display\0setPower_display\0"
-    "switch1_slot\0val"
+    "switch1_slot\0val\0input_number\0str"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,19 +54,20 @@ static const uint qt_meta_data_Powerprotect[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
-       1,   38, // properties
+       4,   14, // methods
+       1,   46, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
+       1,    1,   34,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   32,    2, 0x0a /* Public */,
-       5,    1,   35,    2, 0x0a /* Public */,
+       4,    1,   37,    2, 0x0a /* Public */,
+       5,    1,   40,    2, 0x0a /* Public */,
+       7,    1,   43,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -72,6 +75,7 @@ static const uint qt_meta_data_Powerprotect[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::Bool,    6,
+    QMetaType::Void, QMetaType::QString,    8,
 
  // properties: name, type, flags
        3, QMetaType::QString, 0x00495103,
@@ -91,6 +95,7 @@ void Powerprotect::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->power_displayChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->setPower_display((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->switch1_slot((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 3: _t->input_number((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -150,13 +155,13 @@ int Powerprotect::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty

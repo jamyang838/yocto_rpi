@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <curl/curl.h>
 
 #define PIN_RELAY   25
 
@@ -26,6 +27,7 @@ QString power_display() const;
 public slots:
 void setPower_display(QString power_display);
 void switch1_slot(bool val);
+void input_number(QString str);
 
 signals:
 

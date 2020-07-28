@@ -3,8 +3,13 @@
 #include <QQmlContext>
 #include "powerprotect.h"
 
+
+
 int main(int argc, char *argv[])
 {
+    //**********************************
+
+    //**********************
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -23,6 +28,5 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
     return app.exec();
 }
