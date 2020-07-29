@@ -3,11 +3,15 @@
 
 
 Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
-    m_timer(new QTimer(this))
+    m_timer(new QTimer(this)),
+    m_lowlimit(0),
+    m_uplimit(0)
 {
 
     //Curl******************************************************
 
+
+    //Init*******************************************************
 
     //Pin*******************************************************
     wiringPiSetup();
@@ -38,6 +42,21 @@ QString Powerprotect::power_display() const
     return m_power_display;
 }
 
+QString Powerprotect::limit_display() const
+{
+    return m_limit_display;
+}
+
+double Powerprotect::uplimit() const
+{
+    return m_uplimit;
+}
+
+double Powerprotect::lowlimit() const
+{
+    return m_lowlimit;
+}
+
 void Powerprotect::setPower_display(QString power_display)
 {
     if (m_power_display == power_display)
@@ -62,7 +81,48 @@ void Powerprotect::switch1_slot(bool val)
 void Powerprotect::input_number(QString str)
 {
     qDebug() << str;
+    setLimit_display( m_limit_display + str);
+}
 
+void Powerprotect::input_click(QString str)
+{
+    if(str.toLower() == "ok")
+    {
+
+    }
+    else if(str.toLower() ==  "cancel")
+    {
+
+    }
+}
+
+void Powerprotect::setLimit_display(QString limit_display)
+{
+    if (m_limit_display == limit_display)
+        return;
+
+    m_limit_display = limit_display;
+    emit limit_displayChanged(m_limit_display);
+}
+
+void Powerprotect::setUplimit(double uplimit)
+{
+    qWarning("Floating point comparison needs context sanity check");
+    if (qFuzzyCompare(m_uplimit, uplimit))
+        return;
+
+    m_uplimit = uplimit;
+    emit uplimitChanged(m_uplimit);
+}
+
+void Powerprotect::setLowlimit(double lowlimit)
+{
+    qWarning("Floating point comparison needs context sanity check");
+    if (qFuzzyCompare(m_lowlimit, lowlimit))
+        return;
+
+    m_lowlimit = lowlimit;
+    emit lowlimitChanged(m_lowlimit);
 }
 
 QString Powerprotect::UART_Qeury(QString command)
