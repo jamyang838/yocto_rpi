@@ -4,15 +4,13 @@
 
 Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
     m_timer(new QTimer(this)),
-    m_lowlimit(0),
-    m_uplimit(0)
+    m_uplimit(0),m_lowlimit(0)
 {
-
+    //Test******************************************************
     //Curl******************************************************
-
-
     //Init*******************************************************
-
+    is_upperlimit = false;
+    is_lowerlimit = false;
     //Pin*******************************************************
     wiringPiSetup();
     pinMode(PIN_RELAY ,OUTPUT);    
@@ -24,7 +22,16 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
         QString display_ ;
         if(is_number(recieved_))
         {
-            display_ = Powerprotect::convert_2_powerdisplay(recieved_.toDouble());
+            double power_value = recieved_.toDouble();
+            display_ = Powerprotect::convert_2_powerdisplay( power_value );
+
+            if(
+                    ( (power_value > uplimit()) && is_upperlimit )||
+                    ( (power_value < lowlimit()) && is_lowerlimit )
+                    )
+            {
+                shutdown_relay();
+            }
         }
         else
         {
@@ -34,7 +41,26 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
         setPower_display(display_);
     });
 
-       m_timer->start(200);
+    m_timer->start(200);
+}
+
+void Powerprotect::get_upperlimit(QString str)
+{
+    bool validate;
+    double _val;
+    _val = str.toDouble(&validate);
+    if(validate)
+    {
+        if(Powerprotect::is_set_upperlimit)
+        {
+            setUplimit(_val);
+        }
+        else
+        {
+            setLowlimit(_val);
+        }
+    }
+
 }
 
 QString Powerprotect::power_display() const
@@ -57,6 +83,21 @@ double Powerprotect::lowlimit() const
     return m_lowlimit;
 }
 
+void Powerprotect::set_is_set_upperlimit(bool val)
+{
+    is_set_upperlimit = val;
+}
+
+void Powerprotect::switch_upperlimit(bool val)
+{
+    is_upperlimit = val;
+}
+
+void Powerprotect::switch_lowerlimit(bool val)
+{
+    is_lowerlimit = val;
+}
+
 void Powerprotect::setPower_display(QString power_display)
 {
     if (m_power_display == power_display)
@@ -75,7 +116,6 @@ void Powerprotect::switch1_slot(bool val)
     else
         _value = 0;
     digitalWrite(PIN_RELAY,_value);
-
 }
 
 void Powerprotect::input_number(QString str)
@@ -88,7 +128,7 @@ void Powerprotect::input_click(QString str)
 {
     if(str.toLower() == "ok")
     {
-
+        Powerprotect::get_upperlimit( limit_display() );
     }
     else if(str.toLower() ==  "cancel")
     {

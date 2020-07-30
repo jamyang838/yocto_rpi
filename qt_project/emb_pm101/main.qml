@@ -6,116 +6,154 @@ Window {
     visible: true
     width: 640
     height: 480
-    color: "black"
+    color: "black"   
     title: qsTr("Hello World")
 
     FontLoader {id: font1; source:"qrc:////font/font1.ttf"}
 
+    Connections{
+        target:  pp
+        onUpdate_limitswitch: {
+            switch_upperlimit( switch_protect.checked & switch_up.checked );
+            switch_lowerlimit( switch_protect.checked & switch_low.checked );
+        }
+    }
+    Connections{
+        target: pp
+        onShutdown_relay:{
+            switch1.checked = false;
+            pp.switch1_slot(switch1.checked);
+        }
+    }
 
+    //Main
     Column{
         id: main_display
         width: parent.width
+        padding: 10
         spacing: 10
         TextArea{
             rightPadding: 200
             width: parent.width
             horizontalAlignment: Text.AlignRight
+            activeFocusOnPress: false
             text: power_display
             color: "White"
             font.family: font1
             font.pointSize: 50
         }
+        //Row 2
+        Row{
+            Switch //Realy
+            {
+                id: switch1
+                text: qsTr("Relay")
+                padding: 10
 
-        Switch {
-            id: switch1
-            text: qsTr("Relay")
-            padding: 10
-            onClicked: { pp.switch1_slot(switch1.checked) }
-            background:
-                Rectangle {
-                gradient: Gradient {
-                    GradientStop { position: 0 ; color: "#fff" }
-                    GradientStop { position: 1 ; color: "#eee" }
-                }}
+                onClicked: { pp.switch1_slot(switch1.checked) }
+                background:
+                    Rectangle {
+                    gradient: Gradient {
+                        GradientStop { position: 0 ; color: "#fff" }
+                        GradientStop { position: 1 ; color: "#eee" }
+                    }
+                }
+            }
+
+            Switch //Switch Protect
+            {
+                id: switch_protect
+                text: qsTr("Protect")
+                padding: 10
+                onClicked:{ pp.update_limitswitch() }
+                background:
+                    Rectangle {
+                    gradient: Gradient {
+                        GradientStop { position: 0 ; color: "#fff" }
+                        GradientStop { position: 1 ; color: "#eee" }
+                    }
+                }
+            }
         }
-
+        //Row 3
         Row{
             width: parent.width
             spacing: 10
+            //upper limit area
             Rectangle
             {
                 color: "White"
+                opacity: switch_protect.checked&switch_up.checked ? 1: 0.6
                 width: (parent.width / 2) - 5
-                height: 150
+                height: 180
                 Column{
-                    TextArea{
-                        color: "Black"
+                    spacing: 5
+                    padding: 5
+                    Switch {
+                        id: switch_up
                         text: qsTr("Upper Limit")
+                        onClicked:{ pp.update_limitswitch() }
                     }
-                    TextArea{
-                        Rectangle{
+                    Rectangle{
+                        width: 150
+                        height: 50
+                        TextArea{
                             width: parent.width
                             height: parent.height
-                            color: "Transparent"
-
-                            border.color: "Red"
-                            border.width: 2
+                            horizontalAlignment: Text.AlignRight
+                            verticalAlignment: Text.AlignVCenter
+                            activeFocusOnPress: false
+                            font.pointSize: 16
+                            color: "Black"
+                            text:  pp.uplimit
                         }
-                        color: "Black"
-                        text: pp.uplimit
-
-                    }
-                    Switch {
-                        id: switch2
-                        text: qsTr("Upper Limit")
-                        onClicked: { pp.switch1_slot(switch1.checked) }
                     }
                     Button{
-                        text: "set"
+                        text: "SET"
                         onClicked: {
-                            pp.is_set_upperlimit = true;
+                            pp.set_is_set_upperlimit(true);
                             num_input.visible = true;
                             main_display.visible = false; }}   }
             }
-
+            //lower limit area
             Rectangle
             {
                 color: "White"
+                opacity: switch_protect.checked & switch_low.checked ? 1: 0.6
                 width: (parent.width / 2) - 5
-                height: 150
+                height: 180
                 Column{
-                    TextArea{
-                        color: "Black"
+                    spacing: 5
+                    padding: 5
+                    Switch {
+                        id: switch_low
                         text: qsTr("Lower Limit")
+                        onClicked:{ pp.update_limitswitch() }
                     }
-                    TextArea{
-                        Rectangle{
+                    Rectangle{
+                        width: 150
+                        height: 50
+                        TextArea{
                             width: parent.width
                             height: parent.height
-
-                            color: "Transparent"
-                            border.color: "Red"
-                            border.width: 2
+                            horizontalAlignment: Text.AlignRight
+                            verticalAlignment: Text.AlignVCenter
+                            activeFocusOnPress: false
+                            font.pointSize: 16
+                            color: "Black"
+                            text: pp.lowlimit
                         }
-                        color: "Black"
-                        text: pp.lowlimit
-
-                    }
-                    Switch {
-                        id: switch3
-                        text: qsTr("Upper Limit")
-                        onClicked: { pp.switch1_slot(switch1.checked) }
                     }
                     Button{
-                        text: "set"
+                        text: "SET"
                         onClicked: {
-                            pp.is_set_upperlimit = true;
+                            pp.set_is_set_upperlimit(false);
                             num_input.visible = true;
                             main_display.visible = false; }}   }
             }
-
         }
     }
+    //Number input
     Column{
         id: num_input
         width: parent.width
@@ -123,6 +161,7 @@ Window {
         TextArea{
             text: pp.limit_display
             color: "White"
+            activeFocusOnPress: false
             font.pointSize: 30
             height: 60
         }
@@ -256,13 +295,13 @@ Window {
         Column{
             TextArea{
                 text: "Please Input Limit"
+                activeFocusOnPress: false
                 color: "White"
             }
         }
     }
 }
-
-
+    //Message
     Rectangle{
         id:messagebox
         visible: false
@@ -277,6 +316,7 @@ Window {
             width: parent.width
             TextArea{
                 text: qsTr("aaabbcc")
+                activeFocusOnPress: false
                 color: "White"
                 width: 200
                 font.family: font1
