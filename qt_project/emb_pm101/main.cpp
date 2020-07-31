@@ -11,8 +11,6 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     Powerprotect powerprotect;
     //test***************************
-
-
     engine.rootContext()->setContextProperty("pp", &powerprotect);
     engine.rootContext()->setContextObject(&powerprotect);    
     const QUrl url(QStringLiteral("qrc:/main.qml"));

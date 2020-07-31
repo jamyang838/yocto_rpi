@@ -1,16 +1,18 @@
 #include "powerprotect.h"
-#include "htmltitle.h"
 
-
-Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
+Powerprotect::Powerprotect(QObject *parent) : QObject(parent),    
     m_timer(new QTimer(this)),
     m_uplimit(0),m_lowlimit(0)
 {
     //Test******************************************************
+
     //Curl******************************************************
+
     //Init*******************************************************
     is_upperlimit = false;
     is_lowerlimit = false;
+    is_save = false;
+    save_timer_period = 1000;
     //Pin*******************************************************
     wiringPiSetup();
     pinMode(PIN_RELAY ,OUTPUT);    
@@ -18,11 +20,13 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
     //fd = serialOpen ("/dev/serial0", 115200);
     fd = serialOpen ("/dev/ttyUSB0", 115200);
     connect(m_timer,&QTimer::timeout,[=](){
+        double power_value ;
+        //Query****************************************
         QString recieved_ = Powerprotect::UART_Qeury("MEAS:POW?");
         QString display_ ;
         if(is_number(recieved_))
         {
-            double power_value = recieved_.toDouble();
+            power_value = recieved_.toDouble();
             display_ = Powerprotect::convert_2_powerdisplay( power_value );
 
             if(
@@ -37,14 +41,28 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
         {
             display_ = "--";
         }
-
         setPower_display(display_);
+        //Save*****************************************
+        if(is_save)
+        {
+            double _time1 = last_datetime.msecsTo(QDateTime::currentDateTime());
+            if( _time1 >= save_timer_period )
+            {
+                last_datetime = QDateTime::currentDateTime();
+                file.SaveFile(
+                            last_datetime,
+                            power_value,
+                            is_upperlimit? uplimit() : -1,
+                            is_lowerlimit? lowlimit() : -1,
+                            digitalRead(PIN_RELAY) );
+            }
+        }
     });
 
     m_timer->start(200);
 }
 
-void Powerprotect::get_upperlimit(QString str)
+void Powerprotect::set_limit(QString str)
 {
     bool validate;
     double _val;
@@ -98,6 +116,16 @@ void Powerprotect::switch_lowerlimit(bool val)
     is_lowerlimit = val;
 }
 
+void Powerprotect::switch_savefile(bool val)
+{
+    if(val)
+    {
+        file.CreateFile();
+    }
+    last_datetime = file.get_starttime() ;
+    is_save = val;
+}
+
 void Powerprotect::setPower_display(QString power_display)
 {
     if (m_power_display == power_display)
@@ -109,7 +137,6 @@ void Powerprotect::setPower_display(QString power_display)
 
 void Powerprotect::switch1_slot(bool val)
 {
-    qDebug() << val;
     int _value;
     if(val)
         _value = 1;
@@ -128,7 +155,7 @@ void Powerprotect::input_click(QString str)
 {
     if(str.toLower() == "ok")
     {
-        Powerprotect::get_upperlimit( limit_display() );
+        Powerprotect::set_limit( limit_display() );
     }
     else if(str.toLower() ==  "cancel")
     {

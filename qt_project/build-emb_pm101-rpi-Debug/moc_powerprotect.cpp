@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Powerprotect_t {
-    QByteArrayData data[24];
-    char stringdata0[327];
+    QByteArrayData data[26];
+    char stringdata0[353];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,30 +42,33 @@ QT_MOC_LITERAL(7, 99, 7), // "uplimit"
 QT_MOC_LITERAL(8, 107, 15), // "lowlimitChanged"
 QT_MOC_LITERAL(9, 123, 8), // "lowlimit"
 QT_MOC_LITERAL(10, 132, 18), // "update_limitswitch"
-QT_MOC_LITERAL(11, 151, 14), // "shutdown_relay"
-QT_MOC_LITERAL(12, 166, 16), // "setPower_display"
-QT_MOC_LITERAL(13, 183, 16), // "setLimit_display"
-QT_MOC_LITERAL(14, 200, 10), // "setUplimit"
-QT_MOC_LITERAL(15, 211, 11), // "setLowlimit"
-QT_MOC_LITERAL(16, 223, 12), // "switch1_slot"
-QT_MOC_LITERAL(17, 236, 3), // "val"
-QT_MOC_LITERAL(18, 240, 12), // "input_number"
-QT_MOC_LITERAL(19, 253, 3), // "str"
-QT_MOC_LITERAL(20, 257, 11), // "input_click"
-QT_MOC_LITERAL(21, 269, 21), // "set_is_set_upperlimit"
-QT_MOC_LITERAL(22, 291, 17), // "switch_upperlimit"
-QT_MOC_LITERAL(23, 309, 17) // "switch_lowerlimit"
+QT_MOC_LITERAL(11, 151, 9), // "save_file"
+QT_MOC_LITERAL(12, 161, 14), // "shutdown_relay"
+QT_MOC_LITERAL(13, 176, 16), // "setPower_display"
+QT_MOC_LITERAL(14, 193, 16), // "setLimit_display"
+QT_MOC_LITERAL(15, 210, 10), // "setUplimit"
+QT_MOC_LITERAL(16, 221, 11), // "setLowlimit"
+QT_MOC_LITERAL(17, 233, 12), // "switch1_slot"
+QT_MOC_LITERAL(18, 246, 3), // "val"
+QT_MOC_LITERAL(19, 250, 12), // "input_number"
+QT_MOC_LITERAL(20, 263, 3), // "str"
+QT_MOC_LITERAL(21, 267, 11), // "input_click"
+QT_MOC_LITERAL(22, 279, 21), // "set_is_set_upperlimit"
+QT_MOC_LITERAL(23, 301, 17), // "switch_upperlimit"
+QT_MOC_LITERAL(24, 319, 17), // "switch_lowerlimit"
+QT_MOC_LITERAL(25, 337, 15) // "switch_savefile"
 
     },
     "Powerprotect\0power_displayChanged\0\0"
     "power_display\0limit_displayChanged\0"
     "limit_display\0uplimitChanged\0uplimit\0"
     "lowlimitChanged\0lowlimit\0update_limitswitch\0"
-    "shutdown_relay\0setPower_display\0"
+    "save_file\0shutdown_relay\0setPower_display\0"
     "setLimit_display\0setUplimit\0setLowlimit\0"
     "switch1_slot\0val\0input_number\0str\0"
     "input_click\0set_is_set_upperlimit\0"
-    "switch_upperlimit\0switch_lowerlimit"
+    "switch_upperlimit\0switch_lowerlimit\0"
+    "switch_savefile"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,32 +78,34 @@ static const uint qt_meta_data_Powerprotect[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
-       4,  138, // properties
+      18,   14, // methods
+       4,  152, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       6,       // signalCount
+       7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x06 /* Public */,
-       4,    1,   97,    2, 0x06 /* Public */,
-       6,    1,  100,    2, 0x06 /* Public */,
-       8,    1,  103,    2, 0x06 /* Public */,
-      10,    0,  106,    2, 0x06 /* Public */,
-      11,    0,  107,    2, 0x06 /* Public */,
+       1,    1,  104,    2, 0x06 /* Public */,
+       4,    1,  107,    2, 0x06 /* Public */,
+       6,    1,  110,    2, 0x06 /* Public */,
+       8,    1,  113,    2, 0x06 /* Public */,
+      10,    0,  116,    2, 0x06 /* Public */,
+      11,    0,  117,    2, 0x06 /* Public */,
+      12,    0,  118,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    1,  108,    2, 0x0a /* Public */,
-      13,    1,  111,    2, 0x0a /* Public */,
-      14,    1,  114,    2, 0x0a /* Public */,
-      15,    1,  117,    2, 0x0a /* Public */,
-      16,    1,  120,    2, 0x0a /* Public */,
-      18,    1,  123,    2, 0x0a /* Public */,
-      20,    1,  126,    2, 0x0a /* Public */,
-      21,    1,  129,    2, 0x0a /* Public */,
-      22,    1,  132,    2, 0x0a /* Public */,
-      23,    1,  135,    2, 0x0a /* Public */,
+      13,    1,  119,    2, 0x0a /* Public */,
+      14,    1,  122,    2, 0x0a /* Public */,
+      15,    1,  125,    2, 0x0a /* Public */,
+      16,    1,  128,    2, 0x0a /* Public */,
+      17,    1,  131,    2, 0x0a /* Public */,
+      19,    1,  134,    2, 0x0a /* Public */,
+      21,    1,  137,    2, 0x0a /* Public */,
+      22,    1,  140,    2, 0x0a /* Public */,
+      23,    1,  143,    2, 0x0a /* Public */,
+      24,    1,  146,    2, 0x0a /* Public */,
+      25,    1,  149,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -109,18 +114,20 @@ static const uint qt_meta_data_Powerprotect[] = {
     QMetaType::Void, QMetaType::Double,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::Double,    7,
     QMetaType::Void, QMetaType::Double,    9,
-    QMetaType::Void, QMetaType::Bool,   17,
-    QMetaType::Void, QMetaType::QString,   19,
-    QMetaType::Void, QMetaType::QString,   19,
-    QMetaType::Void, QMetaType::Bool,   17,
-    QMetaType::Void, QMetaType::Bool,   17,
-    QMetaType::Void, QMetaType::Bool,   17,
+    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, QMetaType::QString,   20,
+    QMetaType::Void, QMetaType::QString,   20,
+    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, QMetaType::Bool,   18,
 
  // properties: name, type, flags
        3, QMetaType::QString, 0x00495103,
@@ -148,17 +155,19 @@ void Powerprotect::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 2: _t->uplimitChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 3: _t->lowlimitChanged((*reinterpret_cast< double(*)>(_a[1]))); break;
         case 4: _t->update_limitswitch(); break;
-        case 5: _t->shutdown_relay(); break;
-        case 6: _t->setPower_display((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 7: _t->setLimit_display((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 8: _t->setUplimit((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 9: _t->setLowlimit((*reinterpret_cast< double(*)>(_a[1]))); break;
-        case 10: _t->switch1_slot((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 11: _t->input_number((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 12: _t->input_click((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 13: _t->set_is_set_upperlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 14: _t->switch_upperlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 15: _t->switch_lowerlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 5: _t->save_file(); break;
+        case 6: _t->shutdown_relay(); break;
+        case 7: _t->setPower_display((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->setLimit_display((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 9: _t->setUplimit((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 10: _t->setLowlimit((*reinterpret_cast< double(*)>(_a[1]))); break;
+        case 11: _t->switch1_slot((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 12: _t->input_number((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 13: _t->input_click((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 14: _t->set_is_set_upperlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 15: _t->switch_upperlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 16: _t->switch_lowerlimit((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 17: _t->switch_savefile((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -200,8 +209,15 @@ void Powerprotect::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         }
         {
             typedef void (Powerprotect::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Powerprotect::shutdown_relay)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Powerprotect::save_file)) {
                 *result = 5;
+                return;
+            }
+        }
+        {
+            typedef void (Powerprotect::*_t)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Powerprotect::shutdown_relay)) {
+                *result = 6;
                 return;
             }
         }
@@ -259,13 +275,13 @@ int Powerprotect::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 18)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 18;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 18)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        _id -= 18;
     }
 #ifndef QT_NO_PROPERTIES
    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -322,9 +338,15 @@ void Powerprotect::update_limitswitch()
 }
 
 // SIGNAL 5
-void Powerprotect::shutdown_relay()
+void Powerprotect::save_file()
 {
     QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
+}
+
+// SIGNAL 6
+void Powerprotect::shutdown_relay()
+{
+    QMetaObject::activate(this, &staticMetaObject, 6, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

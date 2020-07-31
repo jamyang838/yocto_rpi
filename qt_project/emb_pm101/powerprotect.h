@@ -2,6 +2,8 @@
 #define POWERPROTECT_H
 
 #include <QObject>
+#include <QFile>
+#include <QDateTime>
 #include <QTimer>
 #include <string.h>
 #include <ctime>
@@ -9,6 +11,7 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <curl/curl.h>
+#include "fileio.h"
 
 #define PIN_RELAY   25
 
@@ -22,7 +25,7 @@ class Powerprotect : public QObject
 
 public:    
     explicit Powerprotect(QObject *parent = nullptr);
-    void get_upperlimit(QString str);
+    void set_limit(QString str);
     void get_lowerlimit(QString str);
     QString power_display() const;
     QString limit_display() const;
@@ -35,13 +38,13 @@ public slots:
     void setLimit_display(QString limit_display);
     void setUplimit(double uplimit);
     void setLowlimit(double lowlimit);
-
     void switch1_slot(bool val);
     void input_number(QString str);
     void input_click(QString str);
     void set_is_set_upperlimit(bool val);
     void switch_upperlimit(bool val);
     void switch_lowerlimit(bool val);
+    void switch_savefile(bool val);
 
 signals:
     void power_displayChanged(QString power_display);
@@ -49,9 +52,13 @@ signals:
     void uplimitChanged(double uplimit);
     void lowlimitChanged(double lowlimit);
     void update_limitswitch(void);
+    void save_file(void);
     void shutdown_relay( void );
 
 private:
+    FileIO file;
+    int save_timer_period;
+    QDateTime last_datetime;
     QString UART_Qeury(QString command);
     QString convert_2_powerdisplay(double val);
     bool is_number(QString val);
@@ -63,6 +70,7 @@ private:
     QString m_power_display;
     bool is_upperlimit;
     bool is_lowerlimit;
+    bool is_save;
 };
 
 #endif // POWERPROTECT_H

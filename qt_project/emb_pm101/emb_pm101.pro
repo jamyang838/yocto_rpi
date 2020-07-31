@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        fileio.cpp \
         main.cpp \
         powerprotect.cpp
 
@@ -39,6 +40,7 @@ INCLUDEPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-
 DEPENDPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include
 
 HEADERS += \
+    fileio.h \
     powerprotect.h
 
 

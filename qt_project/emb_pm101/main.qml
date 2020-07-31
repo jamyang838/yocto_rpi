@@ -2,7 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.10
 import QtQuick.Controls 2.3
 
-Window {
+Window {    
     visible: true
     width: 640
     height: 480
@@ -66,6 +66,20 @@ Window {
                 text: qsTr("Protect")
                 padding: 10
                 onClicked:{ pp.update_limitswitch() }
+                background:
+                    Rectangle {
+                    gradient: Gradient {
+                        GradientStop { position: 0 ; color: "#fff" }
+                        GradientStop { position: 1 ; color: "#eee" }
+                    }
+                }
+            }
+            Switch //Switch Save
+            {
+                id: switch_save
+                text: qsTr("Save")
+                padding: 10
+                onClicked:{ pp.switch_savefile(switch_save.checked) }
                 background:
                     Rectangle {
                     gradient: Gradient {
