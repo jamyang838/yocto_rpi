@@ -121,6 +121,7 @@ void Powerprotect::switch_savefile(bool val)
     if(val)
     {
         file.CreateFile();
+        file.CreateCloud();
     }
     last_datetime = file.get_starttime() ;
     is_save = val;
@@ -147,7 +148,6 @@ void Powerprotect::switch1_slot(bool val)
 
 void Powerprotect::input_number(QString str)
 {
-    qDebug() << str;
     setLimit_display( m_limit_display + str);
 }
 

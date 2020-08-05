@@ -5,9 +5,9 @@
 #include <QFile>
 #include <QDateTime>
 #include <QTimer>
+#include <QDebug>
 #include <string.h>
 #include <ctime>
-#include <QDebug>
 #include <wiringPi.h>
 #include <wiringSerial.h>
 #include <curl/curl.h>
