@@ -123,7 +123,7 @@ void Powerprotect::switch_savefile(bool val)
         file.CreateFile();
         file.CreateCloud();
     }
-    last_datetime = file.get_starttime() ;
+    last_datetime = file.get_starttime();
     is_save = val;
 }
 

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QFile>
 #include <QDateTime>
+#include <QRegExp>
 #include <QTimer>
 #include <QDebug>
 #include <string.h>

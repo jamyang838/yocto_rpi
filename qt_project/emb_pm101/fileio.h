@@ -2,6 +2,7 @@
 #define FILEIO_H
 
 #include <QObject>
+#include <QRegExp>
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
@@ -23,6 +24,7 @@ public slots:
 signals:
 
 private:
+    int header_id;
     void filenameGen( void );
     QDateTime starttime;
     QString filename;
