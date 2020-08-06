@@ -50,12 +50,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../emb_pm101/fileio.cpp \
+SOURCES       = ../emb_pm101/convert_json.cpp \
+		../emb_pm101/fileio.cpp \
 		../emb_pm101/main.cpp \
 		../emb_pm101/powerprotect.cpp qrc_qml.cpp \
 		moc_fileio.cpp \
 		moc_powerprotect.cpp
-OBJECTS       = fileio.o \
+OBJECTS       = convert_json.o \
+		fileio.o \
 		main.o \
 		powerprotect.o \
 		qrc_qml.o \
@@ -227,8 +229,10 @@ DIST          = /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-po
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/exceptions.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/yacc.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/lex.prf \
-		../emb_pm101/emb_pm101.pro ../emb_pm101/fileio.h \
-		../emb_pm101/powerprotect.h ../emb_pm101/fileio.cpp \
+		../emb_pm101/emb_pm101.pro ../emb_pm101/convert_json.h \
+		../emb_pm101/fileio.h \
+		../emb_pm101/powerprotect.h ../emb_pm101/convert_json.cpp \
+		../emb_pm101/fileio.cpp \
 		../emb_pm101/main.cpp \
 		../emb_pm101/powerprotect.cpp
 QMAKE_TARGET  = emb_pm101
@@ -607,8 +611,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../emb_pm101/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_pm101/fileio.h ../emb_pm101/powerprotect.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_pm101/fileio.cpp ../emb_pm101/main.cpp ../emb_pm101/powerprotect.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/convert_json.h ../emb_pm101/fileio.h ../emb_pm101/powerprotect.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/convert_json.cpp ../emb_pm101/fileio.cpp ../emb_pm101/main.cpp ../emb_pm101/powerprotect.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -651,12 +655,15 @@ moc_predefs.h: /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-pok
 compiler_moc_header_make_all: moc_fileio.cpp moc_powerprotect.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_fileio.cpp moc_powerprotect.cpp
-moc_fileio.cpp: ../emb_pm101/fileio.h \
+moc_fileio.cpp: ../emb_pm101/convert_json.h \
+		../emb_pm101/fileio.h \
 		moc_predefs.h \
 		/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc
 	/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc $(DEFINES) --include ./moc_predefs.h -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/linux-oe-g++ -I/home/yang/yocto/m2_poky/qt_project/emb_pm101 -I/home/yang/yocto/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuickControls2 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuick -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtGui -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQml -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtNetwork -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtCore -I. -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/arm-poky-linux-gnueabi -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/backward -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include-fixed -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include ../emb_pm101/fileio.h -o moc_fileio.cpp
 
-moc_powerprotect.cpp: ../emb_pm101/powerprotect.h \
+moc_powerprotect.cpp: ../emb_pm101/fileio.h \
+		../emb_pm101/convert_json.h \
+		../emb_pm101/powerprotect.h \
 		moc_predefs.h \
 		/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc
 	/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc $(DEFINES) --include ./moc_predefs.h -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/linux-oe-g++ -I/home/yang/yocto/m2_poky/qt_project/emb_pm101 -I/home/yang/yocto/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuickControls2 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQuick -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtGui -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtQml -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtNetwork -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/qt5/QtCore -I. -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0 -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/arm-poky-linux-gnueabi -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include/c++/7.3.0/backward -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/gcc/arm-poky-linux-gnueabi/7.3.0/include -I/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/lib/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/7.3.0/include-fixed -I/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include ../emb_pm101/powerprotect.h -o moc_powerprotect.cpp
@@ -675,14 +682,21 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-fileio.o: ../emb_pm101/fileio.cpp ../emb_pm101/fileio.h
+convert_json.o: ../emb_pm101/convert_json.cpp ../emb_pm101/convert_json.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o convert_json.o ../emb_pm101/convert_json.cpp
+
+fileio.o: ../emb_pm101/fileio.cpp ../emb_pm101/fileio.h \
+		../emb_pm101/convert_json.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileio.o ../emb_pm101/fileio.cpp
 
-main.o: ../emb_pm101/main.cpp ../emb_pm101/powerprotect.h
+main.o: ../emb_pm101/main.cpp ../emb_pm101/powerprotect.h \
+		../emb_pm101/fileio.h \
+		../emb_pm101/convert_json.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../emb_pm101/main.cpp
 
 powerprotect.o: ../emb_pm101/powerprotect.cpp ../emb_pm101/powerprotect.h \
-		../emb_pm101/htmltitle.h
+		../emb_pm101/fileio.h \
+		../emb_pm101/convert_json.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o powerprotect.o ../emb_pm101/powerprotect.cpp
 
 qrc_qml.o: qrc_qml.cpp 
