@@ -22,7 +22,7 @@ class Powerprotect : public QObject
     Q_PROPERTY(QString power_display READ power_display WRITE setPower_display NOTIFY power_displayChanged)
     Q_PROPERTY(QString limit_display READ limit_display WRITE setLimit_display NOTIFY limit_displayChanged)
     Q_PROPERTY(double uplimit READ uplimit WRITE setUplimit NOTIFY uplimitChanged)
-    Q_PROPERTY(double lowlimit READ lowlimit WRITE setLowlimit NOTIFY lowlimitChanged)    
+    Q_PROPERTY(double lowlimit READ lowlimit WRITE setLowlimit NOTIFY lowlimitChanged)        
 
 public:    
     explicit Powerprotect(QObject *parent = nullptr);
@@ -33,6 +33,7 @@ public:
     double uplimit() const;
     double lowlimit() const;
     bool is_set_upperlimit;
+
 
 public slots:
     void setPower_display(QString power_display);
@@ -46,6 +47,7 @@ public slots:
     void switch_upperlimit(bool val);
     void switch_lowerlimit(bool val);
     void switch_savefile(bool val);
+    QString get_rpi_desc( void );
 
 signals:
     void power_displayChanged(QString power_display);
@@ -55,6 +57,7 @@ signals:
     void update_limitswitch(void);
     void save_file(void);
     void shutdown_relay( void );
+    void initial_signal(void);
 
 private:
     FileIO file;
@@ -72,6 +75,7 @@ private:
     bool is_upperlimit;
     bool is_lowerlimit;
     bool is_save;
+    QString mac_num;
 };
 
 #endif // POWERPROTECT_H

@@ -23,9 +23,14 @@ Window {
         onShutdown_relay:{
             switch1.checked = false;
             pp.switch1_slot(switch1.checked);
+        }        
+    }    
+    Connections{
+        target: pp
+        onInitial_signal:{
+            wlanMac_text.text = pp.get_rpi_desc();
         }
     }
-
     //Main
     Column{
         id: main_display
@@ -164,6 +169,14 @@ Window {
                             pp.set_is_set_upperlimit(false);
                             num_input.visible = true;
                             main_display.visible = false; }}   }
+            }
+        }
+        //Row 4
+        Row{
+            spacing: 10
+            TextArea{
+                id: wlanMac_text
+                color: "White"
             }
         }
     }

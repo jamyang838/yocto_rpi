@@ -5,14 +5,14 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
     m_uplimit(0),m_lowlimit(0)
 {
     //Test******************************************************
-
+    mac_num = "machine id: " + convert_json::get_wlan0_mac();
     //Curl******************************************************
 
     //Init*******************************************************
     is_upperlimit = false;
     is_lowerlimit = false;
     is_save = false;
-    save_timer_period = 1000;
+    save_timer_period = 1000;    
     //Pin*******************************************************
     wiringPiSetup();
     pinMode(PIN_RELAY ,OUTPUT);    
@@ -57,6 +57,8 @@ Powerprotect::Powerprotect(QObject *parent) : QObject(parent),
                             digitalRead(PIN_RELAY) );
             }
         }
+        //*********************************************
+        initial_signal();
     });
 
     m_timer->start(200);
@@ -99,6 +101,14 @@ double Powerprotect::uplimit() const
 double Powerprotect::lowlimit() const
 {
     return m_lowlimit;
+}
+
+QString Powerprotect::get_rpi_desc()
+{
+    QString result = mac_num;
+    result.append("\n");
+    result.append( QDateTime::currentDateTime().toString("yyyy-MM-dd THH:mm:ss"));
+    return result;
 }
 
 void Powerprotect::set_is_set_upperlimit(bool val)

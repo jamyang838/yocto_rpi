@@ -14,9 +14,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     Powerprotect powerprotect;
     //test***************************
+
     engine.rootContext()->setContextProperty("pp", &powerprotect);
     engine.rootContext()->setContextObject(&powerprotect);    
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/main.qml"));    
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

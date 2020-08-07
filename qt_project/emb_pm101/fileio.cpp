@@ -57,10 +57,12 @@ void FileIO::CreateCloud()
          headers = curl_slist_append(headers, iter->c_str());
          curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);//設定http請求頭資訊
          curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-         curl_easy_setopt(curl, CURLOPT_POSTFIELDS,  convert_json::convert_header().toUtf8().constData());
+         const char* s =  convert_json::convert_header().toUtf8().constData();
+         strcpy(tramsmission, s);
+         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, tramsmission);
          res =  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_header_data);
          curl_easy_perform(curl);
-         qDebug() << curl_easy_strerror(res);
+         //qDebug() << curl_easy_strerror(res);
          curl_easy_cleanup(curl);
     }
 }
@@ -95,12 +97,11 @@ void FileIO::SaveCloud(int time_ms, double power)
              curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);//設定http請求頭資訊
              curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
              const char* s = convert_json::convert_detail(header_id, time_ms, power).toUtf8().constData();
-             strcpy(tramsmission, s);
-             qDebug() << s;
+             strcpy(tramsmission, s);             
              curl_easy_setopt(curl, CURLOPT_POSTFIELDS, tramsmission );
              res =  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_detail_data);
              curl_easy_perform(curl);
-             qDebug() << curl_easy_strerror(res);
+             //qDebug() << curl_easy_strerror(res);
              curl_easy_cleanup(curl);
         }
     }
@@ -109,11 +110,11 @@ void FileIO::SaveCloud(int time_ms, double power)
 size_t FileIO::write_header_data(void *buffer, size_t size, size_t nmemb, void *userp)
 {
     char* xxx = (char*)buffer;
-    qDebug() << xxx;
+    //qDebug() << xxx;
     QString str = QString(xxx);
     QRegExp re("\"id\":(\\d+)");
-    qDebug() << str.indexOf(re);    
-    qDebug() << "900772";
+    str.indexOf(re);
+    //qDebug() << "900772";
     header_id = re.cap(1).toInt();
     //qDebug() << header_id;
     return size;
@@ -125,7 +126,7 @@ size_t FileIO::write_detail_data(void *buffer, size_t size, size_t nmemb, void *
     qDebug() <<(char*)buffer ;
     QString str = QString((char*)buffer);
     QRegExp re("\"id\":(\\d+)");
-    qDebug() << re.cap(1).toDouble() ;
+    //qDebug() << re.cap(1).toDouble() ;
     return size;
 }
 
