@@ -53,13 +53,15 @@ OBJECTS_DIR   = ./
 SOURCES       = ../emb_pm101/convert_json.cpp \
 		../emb_pm101/fileio.cpp \
 		../emb_pm101/main.cpp \
-		../emb_pm101/powerprotect.cpp qrc_qml.cpp \
+		../emb_pm101/powerprotect.cpp \
+		../emb_pm101/wifi_access.cpp qrc_qml.cpp \
 		moc_fileio.cpp \
 		moc_powerprotect.cpp
 OBJECTS       = convert_json.o \
 		fileio.o \
 		main.o \
 		powerprotect.o \
+		wifi_access.o \
 		qrc_qml.o \
 		moc_fileio.o \
 		moc_powerprotect.o
@@ -231,10 +233,12 @@ DIST          = /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-po
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/lex.prf \
 		../emb_pm101/emb_pm101.pro ../emb_pm101/convert_json.h \
 		../emb_pm101/fileio.h \
-		../emb_pm101/powerprotect.h ../emb_pm101/convert_json.cpp \
+		../emb_pm101/powerprotect.h \
+		../emb_pm101/wifi_access.h ../emb_pm101/convert_json.cpp \
 		../emb_pm101/fileio.cpp \
 		../emb_pm101/main.cpp \
-		../emb_pm101/powerprotect.cpp
+		../emb_pm101/powerprotect.cpp \
+		../emb_pm101/wifi_access.cpp
 QMAKE_TARGET  = emb_pm101
 DESTDIR       = 
 TARGET        = emb_pm101
@@ -611,8 +615,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../emb_pm101/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_pm101/convert_json.h ../emb_pm101/fileio.h ../emb_pm101/powerprotect.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_pm101/convert_json.cpp ../emb_pm101/fileio.cpp ../emb_pm101/main.cpp ../emb_pm101/powerprotect.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/convert_json.h ../emb_pm101/fileio.h ../emb_pm101/powerprotect.h ../emb_pm101/wifi_access.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_pm101/convert_json.cpp ../emb_pm101/fileio.cpp ../emb_pm101/main.cpp ../emb_pm101/powerprotect.cpp ../emb_pm101/wifi_access.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -663,6 +667,7 @@ moc_fileio.cpp: ../emb_pm101/convert_json.h \
 
 moc_powerprotect.cpp: ../emb_pm101/fileio.h \
 		../emb_pm101/convert_json.h \
+		../emb_pm101/wifi_access.h \
 		../emb_pm101/powerprotect.h \
 		moc_predefs.h \
 		/opt/example-distro/sdkversion/sysroots/x86_64-exampledistro-linux/usr/bin/qt5/moc
@@ -691,13 +696,18 @@ fileio.o: ../emb_pm101/fileio.cpp ../emb_pm101/fileio.h \
 
 main.o: ../emb_pm101/main.cpp ../emb_pm101/powerprotect.h \
 		../emb_pm101/fileio.h \
-		../emb_pm101/convert_json.h
+		../emb_pm101/convert_json.h \
+		../emb_pm101/wifi_access.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../emb_pm101/main.cpp
 
 powerprotect.o: ../emb_pm101/powerprotect.cpp ../emb_pm101/powerprotect.h \
 		../emb_pm101/fileio.h \
-		../emb_pm101/convert_json.h
+		../emb_pm101/convert_json.h \
+		../emb_pm101/wifi_access.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o powerprotect.o ../emb_pm101/powerprotect.cpp
+
+wifi_access.o: ../emb_pm101/wifi_access.cpp ../emb_pm101/wifi_access.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wifi_access.o ../emb_pm101/wifi_access.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp

@@ -111,6 +111,16 @@ QString Powerprotect::get_rpi_desc()
     return result;
 }
 
+void Powerprotect::enter_advanced_mode(QString str)
+{
+    qDebug() << str;
+    if(str == "900772")
+    {
+        qDebug() << "ok";
+        QCoreApplication::quit();
+    }
+}
+
 void Powerprotect::set_is_set_upperlimit(bool val)
 {
     is_set_upperlimit = val;

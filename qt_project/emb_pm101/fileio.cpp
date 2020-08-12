@@ -1,8 +1,6 @@
 #include "fileio.h"
 #include <QDebug>
 
-
-
 FileIO::FileIO(QObject *parent) : QObject(parent)
 {    
     /* In windows, this will init the winsock stuff */
@@ -129,7 +127,6 @@ size_t FileIO::write_detail_data(void *buffer, size_t size, size_t nmemb, void *
     //qDebug() << re.cap(1).toDouble() ;
     return size;
 }
-
 
 QDateTime FileIO::get_starttime()
 {

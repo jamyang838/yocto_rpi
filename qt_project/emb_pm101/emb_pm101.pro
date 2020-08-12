@@ -18,7 +18,8 @@ SOURCES += \
         convert_json.cpp \
         fileio.cpp \
         main.cpp \
-        powerprotect.cpp
+        powerprotect.cpp \
+        wifi_access.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,7 +44,8 @@ DEPENDPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-n
 HEADERS += \
     convert_json.h \
     fileio.h \
-    powerprotect.h
+    powerprotect.h \
+    wifi_access.h
 
 
 unix:!macx: LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/ -lcurl

@@ -11,6 +11,7 @@ Window {
 
     FontLoader {id: font1; source:"qrc:////font/font1.ttf"}
 
+    /*
     Connections{
         target:  pp
         onUpdate_limitswitch: {
@@ -18,17 +19,26 @@ Window {
             switch_lowerlimit( switch_protect.checked & switch_low.checked );
         }
     }
+    */
     Connections{
         target: pp
         onShutdown_relay:{
             switch1.checked = false;
             pp.switch1_slot(switch1.checked);
         }        
-    }    
-    Connections{
-        target: pp
         onInitial_signal:{
             wlanMac_text.text = pp.get_rpi_desc();
+        }
+        onUpdate_limitswitch: {
+            switch_upperlimit( switch_protect.checked & switch_up.checked );
+            switch_lowerlimit( switch_protect.checked & switch_low.checked );
+        }
+    }
+    Connections{
+        target: pass_input
+        onAccepted: {
+            pp.enter_advanced_mode(pass_input.text);
+            pass_input.text = "";
         }
     }
     //Main
@@ -37,15 +47,71 @@ Window {
         width: parent.width
         padding: 10
         spacing: 10
-        TextArea{
-            rightPadding: 200
-            width: parent.width
-            horizontalAlignment: Text.AlignRight
-            activeFocusOnPress: false
-            text: power_display
-            color: "White"
-            font.family: font1
-            font.pointSize: 50
+        Row{
+            TextArea{
+                rightPadding: 200
+                width: parent.parent.width - 210
+                horizontalAlignment: Text.AlignRight
+                activeFocusOnPress: false
+                text: power_display
+                color: "White"
+                font.family: font1
+                font.pointSize: 50
+            }
+            Button{
+                id: adv_button
+                text: "advanced mode"
+                width: 210
+                onClicked: {
+                    adv_pass.visible = true;
+                    adv_button.visible = false;
+                    pass_input.focus = true;
+                }
+            }
+            Column{
+                id:adv_pass
+                visible: false
+                spacing: 10
+                Rectangle{
+                    width: parent.width
+                    height: 30
+                    color: "Black"
+                    border.color: "White"
+                    border.width: 1
+                    TextInput{
+                        id: pass_input
+                        width: parent.width
+                        y:10
+                        height: 25
+                        font.family: font1
+                        font.pointSize: 20
+                        verticalAlignment: TextInput.AlignVCenter
+                        color: "White"
+                        echoMode:  TextInput.Password
+                    }
+                }
+                Row{
+                    spacing: 10
+                    /*
+                    Button{
+                        text: "ok"
+                        width: 100
+                        onClicked:  Qt.callLater(Qt.quit)
+                    }
+                    */
+                    Button{
+                        text: "cancel"
+                        width: 100
+                        onClicked:  {
+                            adv_pass.visible = false;
+                            adv_button.visible = true;
+                            pass_input.text = "";
+                        }
+                    }
+                }
+            }
+
+
         }
         //Row 2
         Row{
