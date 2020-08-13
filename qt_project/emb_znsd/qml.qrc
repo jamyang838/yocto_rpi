@@ -2,4 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
     </qresource>
+    <qresource prefix="/font">
+        <file alias="font1.ttf">resources/font/AnjaliOldLipi.ttf</file>
+    </qresource>
 </RCC>
