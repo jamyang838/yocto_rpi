@@ -18,15 +18,31 @@ Window {
             power_Text.text = laser.number2Qstring( power );
             frequency_Text.text = laser.number2Qstring( frequency );
             pulsewidth_Text.text = laser.number2Qstring( pulsewidth );
+            ext_switch.checked = ext;
+            modulation_switch.checked = modulation;
+            guidelaser_switch.checked = guide_laser;
+            coded_switch.checked = coded;
+            key_switch.checked = key;
+            warning_Text.text = laser.number2Qstring(warning);
+/*
+            if(update_led.color == "#008000" )
+            {
+                update_led.color = "white";
+            }
+            else
+            {
+                update_led.color = "green";
+            }
+*/
         }
-        onEnable_signal:{
+        onEnable_signal:{            
             status_display.opacity =enb? 1: 0.2;
             status_display.enabled = enb;
         }
     }
     //Title***************************************
     Text {
-        text: "ZNSD status"
+        text: "ZNSD Laser"
         y: 30
         x: 150
         font.bold: true
@@ -36,6 +52,7 @@ Window {
     Row{
         id: status_display
         y: 90
+        //Left Column***************************************
         Column{
         padding: 20
         spacing: 20
@@ -44,7 +61,7 @@ Window {
         Row{
             Text {
                 text: "POWER(%):"
-                width: 200
+                width: 230
                 color: "#ffe74c"
                 font.pointSize: 20
             }
@@ -61,7 +78,7 @@ Window {
         Row{
             Text {
                 text: "Frequency(kHz):"
-                width: 200
+                width: 230
                 color: "#ffe74c"
                 font.pointSize: 20
             }
@@ -77,7 +94,7 @@ Window {
         Row{
             Text {
                 text: "PulseWdith:"
-                width: 200
+                width: 230
                 color: "#ffe74c"
                 font.pointSize: 20
             }
@@ -89,21 +106,80 @@ Window {
                 font.pointSize: 20
             }
         }
-    }
+        //PulseWidth************************************
+        Row{
+            Text {
+                text: "WARNING:"
+                width: 230
+                color: "#ffe74c"
+                font.pointSize: 20
+            }
+            Text {
+                id: warning_Text
+                text: "95"
+                width: 100
+                color: "#ffffff"
+                font.pointSize: 20
+            }
+        }
 
+        //TEST*******************************************************************
+
+        }
+        //Right Column**************************************
         Rectangle{
             color: "White"
             width: 250
             height: 300
             Column{
-                spacing: 20
+                spacing: 20                
+                /*
+                Rectangle{
+                    id: update_led
+                    width: 3
+                    height: 3
+                    radius: 3
+                    x: 150
+                    y: 150
+                    color: "red"
+                }
+                */
                 Switch {
+                    id:ext_switch
                     text: qsTr("Modulation EXT")
+                    font.pointSize: 15
+                    onClicked: {
+                        laser.command_signal(ext_switch.checked?"$51;1":"$51;0" );
+                    }
+                }
+                Switch {
+                    id: modulation_switch
+                    text: qsTr("Modulation ON")
+                    font.pointSize: 15
+                    onClicked: {
+                        laser.command_signal(modulation_switch.checked?"$52;1":"$52;0" );
+                    }
+                }
+                Switch {
+                    id: guidelaser_switch
+                    text: qsTr("Guide Laser")
+                    font.pointSize: 15                    
+                    onClicked: {
+                        laser.command_signal(guidelaser_switch.checked?"$53;1":"$53;0" );
+                    }
+                }
+                Switch {
+                    id: key_switch
+                    text: qsTr("Key")
                     font.pointSize: 15
                 }
                 Switch {
-                    text: qsTr("Modulation EXT")
+                    id: coded_switch
+                    text: qsTr("Adv Mode")
                     font.pointSize: 15
+                    onClicked: {
+                        laser.command_signal(coded_switch.checked?"$54;1":"$54;0" );
+                    }
                 }
             }
         }
