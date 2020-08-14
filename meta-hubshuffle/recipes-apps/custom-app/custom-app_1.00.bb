@@ -13,13 +13,13 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 # No information for SRC_URI yet (only an external source tree was specified)
-SRC_URI = "file://a.out"
+SRC_URI = "file://emb_znsd"
 
 S = "${WORKDIR}"
 
 do_install(){
     install -d ${D}${bindir}
-    install -m 0755 a.out "${D}${bindir}/a"
+    install -m 0755 emb_znsd "${D}${bindir}/emb_znsd"
 }
 
 # NOTE: no Makefile found, unable to determine what needs to be done
