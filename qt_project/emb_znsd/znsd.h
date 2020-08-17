@@ -33,6 +33,7 @@ public:
 
 public slots:
 QString number2Qstring(int numb);
+bool get_update_delay();
 
 signals:
     void status_signal(int power, int frequency, int pulsewidth,

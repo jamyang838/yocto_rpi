@@ -15,25 +15,16 @@ Window {
     Connections{
         target: laser
         onStatus_signal: {
+            if(laser.get_update_delay() ) return;
             power_Text.text = laser.number2Qstring( power );
             frequency_Text.text = laser.number2Qstring( frequency );
             pulsewidth_Text.text = laser.number2Qstring( pulsewidth );
             ext_switch.checked = ext;
             modulation_switch.checked = modulation;
             guidelaser_switch.checked = guide_laser;
-            coded_switch.checked = coded;
-            key_switch.checked = key;
+            coded_switch.checked = coded;            
+            key_led.color = key? "green" : "red";
             warning_Text.text = laser.number2Qstring(warning);
-/*
-            if(update_led.color == "#008000" )
-            {
-                update_led.color = "white";
-            }
-            else
-            {
-                update_led.color = "green";
-            }
-*/
         }
         onEnable_signal:{            
             status_display.opacity =enb? 1: 0.2;
@@ -132,18 +123,24 @@ Window {
             width: 250
             height: 300
             Column{
-                spacing: 20                
-                /*
-                Rectangle{
-                    id: update_led
-                    width: 3
-                    height: 3
-                    radius: 3
-                    x: 150
-                    y: 150
-                    color: "red"
+                y: 20
+                spacing: 15
+                Row{
+                    x: 5
+                    spacing: 10
+                    Rectangle{
+                        id: key_led
+                        width: 50
+                        height: 20
+                        radius: 5
+                        color: "red"
+                    }
+                    Text {
+                        text: qsTr("Key")
+                        font.pointSize: 15
+                    }
                 }
-                */
+
                 Switch {
                     id:ext_switch
                     text: qsTr("Modulation EXT")
@@ -167,12 +164,7 @@ Window {
                     onClicked: {
                         laser.command_signal(guidelaser_switch.checked?"$53;1":"$53;0" );
                     }
-                }
-                Switch {
-                    id: key_switch
-                    text: qsTr("Key")
-                    font.pointSize: 15
-                }
+                }                
                 Switch {
                     id: coded_switch
                     text: qsTr("Adv Mode")

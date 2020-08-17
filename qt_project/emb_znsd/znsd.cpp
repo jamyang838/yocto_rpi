@@ -15,6 +15,7 @@ znsd::znsd(QObject *parent) :
         }
         if(uart_command!="")
         {
+            disable_counter ++;
             recieved_ = UART_Qeury(uart_command);
         }
         else
@@ -32,6 +33,11 @@ znsd::znsd(QObject *parent) :
 QString znsd::number2Qstring(int numb)
 {    
     return QString::number(numb);
+}
+
+bool znsd::get_update_delay()
+{
+    return disable_counter != 0 ;
 }
 
 bool znsd::Status_Check(QList<int> s)
