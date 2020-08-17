@@ -8,3 +8,10 @@ build_sumo/sstate-cache/
 build_sumo/tmp/
 build_sumo/*.log
 build_sumo/*.lock
+build_sumo_deploy/cache/
+build_sumo_deploy/downloads/
+build_sumo_deploy/sstate-cache/
+build_sumo_deploy/tmp/
+build_sumo_deploy/*.log
+build_sumo_deploy/*.lock
+build_sumo_deploy/*.sock
