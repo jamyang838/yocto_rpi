@@ -1,6 +1,6 @@
 #customize the qtbase configuration
-PACKAGECONFIG_append = "gl directfb eglfs gles2 journald xkbcommon"
-PACKAGECONFIG_remove = "xkb"
+PACKAGECONFIG_append = "gl directfb eglfs gles2 journald"
+PACKAGECONFIG_remove = "xkb xkbcommon"
 
 #set the qpa platform
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"

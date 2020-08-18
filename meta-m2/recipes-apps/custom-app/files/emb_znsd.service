@@ -1,0 +1,11 @@
+[Unit]
+Description=Embeded ZNSD Monitor
+
+[Service]
+Type=idle
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/usr/bin/emb_znsd
+
+[Install]
+WantedBy=multi-user.target
