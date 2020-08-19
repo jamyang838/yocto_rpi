@@ -11,7 +11,16 @@ build_sumo/*.lock
 build_sumo_deploy/cache/
 build_sumo_deploy/downloads/
 build_sumo_deploy/sstate-cache/
+build_sumo_deploy/tmp-glibc
 build_sumo_deploy/tmp/
 build_sumo_deploy/*.log
 build_sumo_deploy/*.lock
 build_sumo_deploy/*.sock
+build_test/cache/
+build_test/downloads/
+build_test/sstate-cache/
+build_test/tmp/
+build_test/tmp-glibc
+build_test/*.log
+build_test/*.lock
+build_test/*.sock
