@@ -14,7 +14,6 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 SRC_URI = "file://start_up.sh \
-file://start_up.service \
 "
 
 S = "${WORKDIR}"
@@ -24,14 +23,4 @@ S = "${WORKDIR}"
 do_install_append() {
     install -d "${D}${sysconfdir}/profile.d"
     install -m 0644 "${WORKDIR}/start_up.sh" "${D}${sysconfdir}/profile.d"
-
-    #Install service file
-    install -d "${D}${systemd_system_unitdir}"
-    install -m 0644 ${WORKDIR}/start_up.service \
-    "${D}${systemd_system_unitdir}/start_up.service" 
 }
-
-FILES_${PN} += "\
-${bindir}/emb_znsd \
-${systemd_system_unitdir}/start_up.service \
-"

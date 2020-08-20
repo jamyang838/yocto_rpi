@@ -2,7 +2,7 @@
 Description=Embeded ZNSD Monitor
 
 [Service]
-Type=idle
+Type=simple
 StandardOutput=syslog
 StandardError=syslog
 ARG1=/etc/profile.d/start_up.sh
