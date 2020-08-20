@@ -34,6 +34,7 @@ public:
 public slots:
 QString number2Qstring(int numb);
 bool get_update_delay();
+QString get_alarmString(int alarm_code);
 
 signals:
     void status_signal(int power, int frequency, int pulsewidth,
@@ -47,9 +48,7 @@ private:
     QString uart_command;
     int disable_counter;
     int fd;
-
     bool Status_Check(QList<int> s);
-
     void Status_update(QList<int> s);
     QString UART_Qeury(QString uart_command);
 };

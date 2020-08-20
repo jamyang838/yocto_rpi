@@ -24,7 +24,15 @@ Window {
             guidelaser_switch.checked = guide_laser;
             coded_switch.checked = coded;            
             key_led.color = key? "green" : "red";
-            warning_Text.text = laser.number2Qstring(warning);
+            warning_Text.text = laser.get_alarmString(warning);
+            if(warning!=0)
+            {
+                warning_Text.color = "#ff7878";
+            }
+            else
+            {
+                warning_Text.color = "#77e647";
+            }
         }
         onEnable_signal:{            
             status_display.opacity =enb? 1: 0.2;
@@ -58,7 +66,7 @@ Window {
             }
             Text {
                 id: power_Text
-                text: "200"
+                text: "--"
                 width: 100
                 //color: "#B53F45"
                 color: "#ffffff"
@@ -75,7 +83,7 @@ Window {
             }
             Text {
                 id: frequency_Text
-                text: "95"
+                text: "--"
                 width: 100
                 color: "#ffffff"
                 font.pointSize: 20
@@ -91,31 +99,28 @@ Window {
             }
             Text {
                 id: pulsewidth_Text
-                text: "95"
+                text: "--"
                 width: 100
                 color: "#ffffff"
                 font.pointSize: 20
             }
         }
         //PulseWidth************************************
-        Row{
+        /*
             Text {
-                text: "WARNING:"
+                text: "STATUS:"
                 width: 230
                 color: "#ffe74c"
                 font.pointSize: 20
             }
+            */
             Text {
                 id: warning_Text
-                text: "95"
+                text: "--"
                 width: 100
                 color: "#ffffff"
-                font.pointSize: 20
+                font.pointSize: 10
             }
-        }
-
-        //TEST*******************************************************************
-
         }
         //Right Column**************************************
         Rectangle{
@@ -174,6 +179,15 @@ Window {
                     }
                 }
             }
-        }
+        }        
+    }
+    Text{
+        text: "v1.00\nITRI M200"
+        color: "white"
+        anchors.fill: parent
+        horizontalAlignment: Text.AlignRight
+        verticalAlignment: Text.AlignBottom
+        anchors.rightMargin: 5
+        anchors.bottomMargin: 5
     }
 }

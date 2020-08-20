@@ -40,6 +40,38 @@ bool znsd::get_update_delay()
     return disable_counter != 0 ;
 }
 
+QString znsd::get_alarmString(int alarm_code)
+{
+    QString result;
+    switch (alarm_code) {
+    case 0:        result = "NORMAL";        break;
+    case 1:        result = "SEED_PD";        break;
+    case 2:        result = "CALMAR_FAULT";        break;
+    case 3:        result = "PD1";        break;
+    case 4:        result = "PD2";        break;
+    case 5:        result = "PD3";        break;
+    case 6:        result = "PD4";        break;
+    case 7:        result = "PD5";        break;
+    case 8:        result = "PD6";        break;
+    case 9:        result = "CURRENT_UPPER_LIMIT1";        break;
+    case 10:        result = "CURRENT_UPPER_LIMIT2";        break;
+    case 11:        result = "CURRENT_UPPER_LIMIT3";        break;
+    case 12:        result = "CURRENT_UPPER_LIMIT4";        break;
+    case 13:        result = "CURRENT_UPPER_LIMIT5";        break;
+    case 14:        result = "CURRENT_UPPER_LIMIT6";        break;
+    case 15:        result = "INTERLOCK";        break;
+    case 16:        result = "LIMIT_SWITCH";        break;
+    case 17:        result = "EMERGENCY_STOP_SWITCH";        break;
+    case 18:        result = "CALMAR_SEED_FAULT";        break;
+    default:
+        break;
+    }
+    result.append("(");
+    result.append(QString::number(alarm_code));
+    result.append(")");
+    return result ;
+}
+
 bool znsd::Status_Check(QList<int> s)
 {
     int first_index = s.indexOf(0xFF);
