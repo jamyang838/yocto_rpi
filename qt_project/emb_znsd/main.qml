@@ -22,8 +22,9 @@ Window {
             ext_switch.checked = ext;
             modulation_switch.checked = modulation;
             guidelaser_switch.checked = guide_laser;
-            coded_switch.checked = coded;            
-            key_led.color = key? "green" : "red";
+            coded_switch.checked = coded;
+            key = true;
+            key_led.color = key? "#77e647" : "#ff7878";
             warning_Text.text = laser.get_alarmString(warning);
             if(warning!=0)
             {
@@ -114,13 +115,18 @@ Window {
                 font.pointSize: 20
             }
             */
-            Text {
+        Text {
                 id: warning_Text
                 text: "--"
                 width: 100
                 color: "#ffffff"
                 font.pointSize: 10
             }
+        Slider{
+            width: 150
+            height: 50
+            onValueChanged: {}
+        }
         }
         //Right Column**************************************
         Rectangle{
@@ -182,7 +188,7 @@ Window {
         }        
     }
     Text{
-        text: "v1.00\nITRI M200"
+        text: "v1.10\nITRI M200"
         color: "white"
         anchors.fill: parent
         horizontalAlignment: Text.AlignRight
