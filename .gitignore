@@ -24,3 +24,11 @@ build_test/tmp-glibc
 build_test/*.log
 build_test/*.lock
 build_test/*.sock
+build_gatesgarth/cache/
+build_gatesgarth/downloads/
+build_gatesgarth/sstate-cache/
+build_gatesgarth/tmp-glibc
+build_gatesgarth/tmp/
+build_gatesgarth/*.log
+build_gatesgarth/*.lock
+build_gatesgarth/*.sock
