@@ -19,7 +19,7 @@ IMAGE_INSTALL += "qtquickcontrols2"
 IMAGE_INSTALL += "qtvirtualkeyboard"
 
 #IMAGE_INSTALL += "qtquickcontrols"
-IMAGE_INSTALL += "wiringpi"
+#IMAGE_INSTALL += "wiringpi"
 
 #IMAGE_FSTYPES += "tar.xz ext3 rpi-sdimg"
 #add package managment

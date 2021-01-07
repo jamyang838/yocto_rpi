@@ -1,0 +1,12 @@
+[Unit]
+Description=Embeded ZNSD Monitor
+
+[Service]
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+ARG1=/etc/profile.d/start_up.sh
+ExecStart=source $ARG1
+
+[Install]
+WantedBy=multi-user.target
