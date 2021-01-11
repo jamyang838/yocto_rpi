@@ -188,7 +188,7 @@ Window {
         }        
     }
     Text{
-        text: "v1.10\nITRI M200"
+        text: "v1.11\nITRI M200"
         color: "white"
         anchors.fill: parent
         horizontalAlignment: Text.AlignRight

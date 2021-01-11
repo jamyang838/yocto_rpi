@@ -13,7 +13,6 @@
 #include <wiringSerial.h>
 #include <curl/curl.h>
 #include "fileio.h"
-#include "wifi_access.h"
 
 #define PIN_RELAY   25
 
@@ -33,8 +32,7 @@ public:
     QString limit_display() const;
     double uplimit() const;
     double lowlimit() const;
-    bool is_set_upperlimit;
-    wifi_access wifi;
+    bool is_set_upperlimit;    
 
 public slots:
     void setPower_display(QString power_display);

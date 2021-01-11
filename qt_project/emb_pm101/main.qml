@@ -1,6 +1,7 @@
 import QtQuick 2.10
+import QtCharts 2.2
 import QtQuick.Window 2.10
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.2
 
 Window {    
     visible: true
@@ -11,15 +12,6 @@ Window {
 
     FontLoader {id: font1; source:"qrc:////font/font1.ttf"}
 
-    /*
-    Connections{
-        target:  pp
-        onUpdate_limitswitch: {
-            switch_upperlimit( switch_protect.checked & switch_up.checked );
-            switch_lowerlimit( switch_protect.checked & switch_low.checked );
-        }
-    }
-    */
     Connections{
         target: pp
         onShutdown_relay:{
@@ -48,9 +40,10 @@ Window {
         padding: 10
         spacing: 10
         Row{
+            //********Power Display***************
             TextArea{
                 rightPadding: 200
-                width: parent.parent.width - 210
+                width: parent.parent.width - 180
                 horizontalAlignment: Text.AlignRight
                 activeFocusOnPress: false
                 text: power_display
@@ -58,6 +51,9 @@ Window {
                 font.family: font1
                 font.pointSize: 50
             }
+            //********Power Chart***************
+
+            /*
             Button{
                 id: adv_button
                 text: "advanced mode"
@@ -98,7 +94,7 @@ Window {
                         width: 100
                         onClicked:  Qt.callLater(Qt.quit)
                     }
-                    */
+
                     Button{
                         text: "cancel"
                         width: 100
@@ -108,10 +104,10 @@ Window {
                             pass_input.text = "";
                         }
                     }
+
                 }
             }
-
-
+            */
         }
         //Row 2
         Row{
@@ -422,4 +418,7 @@ Window {
             }
         }
     }
+//*********************test*********************************
+
+//***********************************************************
 }

@@ -1,5 +1,6 @@
 QT += quick
 QT += quickcontrols2
+QT += charts
 
 CONFIG += c++11
 
@@ -18,8 +19,7 @@ SOURCES += \
         convert_json.cpp \
         fileio.cpp \
         main.cpp \
-        powerprotect.cpp \
-        wifi_access.cpp
+        powerprotect.cpp
 
 RESOURCES += qml.qrc
 
@@ -44,8 +44,7 @@ DEPENDPATH += $$PWD/../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-n
 HEADERS += \
     convert_json.h \
     fileio.h \
-    powerprotect.h \
-    wifi_access.h
+    powerprotect.h
 
 
 unix:!macx: LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/ -lcurl
