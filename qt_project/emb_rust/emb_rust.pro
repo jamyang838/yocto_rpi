@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        rust.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,3 +33,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     font/AnjaliOldLipi.ttf
+
+HEADERS += \
+    rust.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/release/ -lwiringPi
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/debug/ -lwiringPi
+else:unix: LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/ -lwiringPi
+
+INCLUDEPATH += $$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include
+DEPENDPATH += $$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/include

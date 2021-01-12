@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.10
 import QtQuick.Controls 2.3
 
+
 Window {
     visible: true
     width: 640
@@ -17,6 +18,7 @@ Window {
             height: 50
             onValueChanged: {}
         }
+
         Text {
             text: "ZNSD Laser"
             y: 30
