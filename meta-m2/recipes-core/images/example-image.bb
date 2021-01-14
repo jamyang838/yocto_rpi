@@ -16,6 +16,7 @@ IMAGE_FEATURES += "ssh-server-dropbear"
 IMAGE_INSTALL += "linux-firmware linux-firmware-bcm43430"
 IMAGE_INSTALL += "kernel-modules"
 IMAGE_INSTALL += "qtquickcontrols2"
+IMAGE_INSTALL_append = " qtdeclarative-qmlplugins qtquickcontrols-qmlplugins"
 IMAGE_INSTALL += "qtcharts"
 
 #IMAGE_INSTALL += "qtquickcontrols"
