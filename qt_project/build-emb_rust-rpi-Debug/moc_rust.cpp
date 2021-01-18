@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_rust_t {
-    QByteArrayData data[15];
-    char stringdata0[150];
+    QByteArrayData data[14];
+    char stringdata0[158];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,24 +34,24 @@ static const qt_meta_stringdata_rust_t qt_meta_stringdata_rust = {
 QT_MOC_LITERAL(0, 0, 4), // "rust"
 QT_MOC_LITERAL(1, 5, 13), // "status_signal"
 QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 5), // "power"
-QT_MOC_LITERAL(4, 26, 9), // "frequency"
-QT_MOC_LITERAL(5, 36, 10), // "scan_width"
-QT_MOC_LITERAL(6, 47, 14), // "scan_frequency"
-QT_MOC_LITERAL(7, 62, 13), // "modulation_on"
-QT_MOC_LITERAL(8, 76, 13), // "enable_signal"
-QT_MOC_LITERAL(9, 90, 3), // "enb"
-QT_MOC_LITERAL(10, 94, 14), // "command_signal"
-QT_MOC_LITERAL(11, 109, 3), // "cmd"
-QT_MOC_LITERAL(12, 113, 14), // "number2Qstring"
-QT_MOC_LITERAL(13, 128, 4), // "numb"
-QT_MOC_LITERAL(14, 133, 16) // "get_update_delay"
+QT_MOC_LITERAL(3, 20, 13), // "enable_signal"
+QT_MOC_LITERAL(4, 34, 3), // "enb"
+QT_MOC_LITERAL(5, 38, 14), // "command_signal"
+QT_MOC_LITERAL(6, 53, 3), // "cmd"
+QT_MOC_LITERAL(7, 57, 11), // "save_recipe"
+QT_MOC_LITERAL(8, 69, 5), // "index"
+QT_MOC_LITERAL(9, 75, 11), // "load_recipe"
+QT_MOC_LITERAL(10, 87, 16), // "get_status_power"
+QT_MOC_LITERAL(11, 104, 20), // "get_status_frequency"
+QT_MOC_LITERAL(12, 125, 15), // "get_status_rate"
+QT_MOC_LITERAL(13, 141, 16) // "get_status_range"
 
     },
-    "rust\0status_signal\0\0power\0frequency\0"
-    "scan_width\0scan_frequency\0modulation_on\0"
-    "enable_signal\0enb\0command_signal\0cmd\0"
-    "number2Qstring\0numb\0get_update_delay"
+    "rust\0status_signal\0\0enable_signal\0enb\0"
+    "command_signal\0cmd\0save_recipe\0index\0"
+    "load_recipe\0get_status_power\0"
+    "get_status_frequency\0get_status_rate\0"
+    "get_status_range"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +61,7 @@ static const uint qt_meta_data_rust[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,22 +69,30 @@ static const uint qt_meta_data_rust[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    5,   39,    2, 0x06 /* Public */,
-       8,    1,   50,    2, 0x06 /* Public */,
-      10,    1,   53,    2, 0x06 /* Public */,
+       1,    0,   59,    2, 0x06 /* Public */,
+       3,    1,   60,    2, 0x06 /* Public */,
+       5,    1,   63,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    1,   56,    2, 0x0a /* Public */,
-      14,    0,   59,    2, 0x0a /* Public */,
+       7,    1,   66,    2, 0x0a /* Public */,
+       9,    1,   69,    2, 0x0a /* Public */,
+      10,    0,   72,    2, 0x0a /* Public */,
+      11,    0,   73,    2, 0x0a /* Public */,
+      12,    0,   74,    2, 0x0a /* Public */,
+      13,    0,   75,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Bool,    3,    4,    5,    6,    7,
-    QMetaType::Void, QMetaType::Bool,    9,
-    QMetaType::Void, QMetaType::QString,   11,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    4,
+    QMetaType::Void, QMetaType::QString,    6,
 
  // slots: parameters
-    QMetaType::QString, QMetaType::Int,   13,
-    QMetaType::Bool,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Int,
+    QMetaType::Int,
+    QMetaType::Int,
+    QMetaType::Int,
 
        0        // eod
 };
@@ -95,19 +103,25 @@ void rust::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         rust *_t = static_cast<rust *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->status_signal((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< bool(*)>(_a[5]))); break;
+        case 0: _t->status_signal(); break;
         case 1: _t->enable_signal((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 2: _t->command_signal((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: { QString _r = _t->number2Qstring((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 4: { bool _r = _t->get_update_delay();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 3: _t->save_recipe((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->load_recipe((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: { int _r = _t->get_status_power();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 6: { int _r = _t->get_status_frequency();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 7: { int _r = _t->get_status_rate();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 8: { int _r = _t->get_status_range();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            typedef void (rust::*_t)(int , int , int , int , bool );
+            typedef void (rust::*_t)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&rust::status_signal)) {
                 *result = 0;
                 return;
@@ -155,22 +169,21 @@ int rust::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 9;
     }
     return _id;
 }
 
 // SIGNAL 0
-void rust::status_signal(int _t1, int _t2, int _t3, int _t4, bool _t5)
+void rust::status_signal()
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1

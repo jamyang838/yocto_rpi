@@ -50,10 +50,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../emb_rust/main.cpp \
+SOURCES       = ../emb_rust/file_io.cpp \
+		../emb_rust/main.cpp \
 		../emb_rust/rust.cpp qrc_qml.cpp \
 		moc_rust.cpp
-OBJECTS       = main.o \
+OBJECTS       = file_io.o \
+		main.o \
 		rust.o \
 		qrc_qml.o \
 		moc_rust.o
@@ -223,7 +225,10 @@ DIST          = ../emb_rust/font/AnjaliOldLipi.ttf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/exceptions.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/yacc.prf \
 		/opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/lex.prf \
-		../emb_rust/emb_rust.pro ../emb_rust/rust.h ../emb_rust/main.cpp \
+		../emb_rust/emb_rust.pro ../emb_rust/config.h \
+		../emb_rust/file_io.h \
+		../emb_rust/rust.h ../emb_rust/file_io.cpp \
+		../emb_rust/main.cpp \
 		../emb_rust/rust.cpp
 QMAKE_TARGET  = emb_rust
 DESTDIR       = 
@@ -599,8 +604,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../emb_rust/qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_rust/rust.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../emb_rust/main.cpp ../emb_rust/rust.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_rust/config.h ../emb_rust/file_io.h ../emb_rust/rust.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../emb_rust/file_io.cpp ../emb_rust/main.cpp ../emb_rust/rust.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -661,7 +666,13 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-main.o: ../emb_rust/main.cpp ../emb_rust/rust.h
+file_io.o: ../emb_rust/file_io.cpp ../emb_rust/file_io.h \
+		../emb_rust/config.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o file_io.o ../emb_rust/file_io.cpp
+
+main.o: ../emb_rust/main.cpp ../emb_rust/rust.h \
+		../emb_rust/file_io.h \
+		../emb_rust/config.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../emb_rust/main.cpp
 
 rust.o: ../emb_rust/rust.cpp ../emb_rust/rust.h

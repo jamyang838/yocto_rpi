@@ -6,19 +6,30 @@ import QtQuick.Layouts 1.3
 
 
 ApplicationWindow {
-    visible: true
-    //title: qsTr("Hello World")
-
+    visible: true    
     Material.theme: Material.Dark
     Material.accent: Material.Orange
-    /*
-    Material.accent: Material.Orange
-    Material.primary: Material.Orange
-*/
 
     FontLoader {id: font1; source:"qrc:////font/font1.ttf"}
+
+    Connections{
+        target: rust;
+        onStatus_signal: {
+            label_power.text =rust.get_status_power();
+            label_frequency.text = rust.get_status_frequency();
+            label_rate.text = rust.get_status_rate();
+            label_range.text = rust.get_status_range();
+        }
+        onEnable_signal: {
+            if(enb){ main_window.opacity = 1;}
+            else{main_window.opacity = 0.2;
+            }
+        }
+    }
+
     Column{
         spacing: 10
+        id: main_window
         Label{text: ""; font.pointSize: 30; width: 640; horizontalAlignment: "AlignHCenter"; height: 30}
         Row{
             spacing: 50
@@ -40,7 +51,8 @@ ApplicationWindow {
                     Row{
                         spacing: 20
                         Label{
-                            text: "50"
+                            id:label_power
+                            //text: "50"
                             font.pointSize: 40
                             width: 200
                             horizontalAlignment: "AlignRight"
@@ -70,7 +82,8 @@ ApplicationWindow {
                     Row{
                         spacing: 20
                         Label{
-                            text: "100"
+                            //text: "100"
+                            id:label_frequency
                             font.pointSize: 40
                             width: 200
                             horizontalAlignment: "AlignRight"
@@ -100,7 +113,8 @@ ApplicationWindow {
                     Row{
                         spacing: 20
                         Label{
-                            text: "8"
+                            //text: "8"
+                            id:label_range
                             font.pointSize: 40
                             width: 200
                             horizontalAlignment: "AlignRight"
@@ -130,7 +144,8 @@ ApplicationWindow {
                     Row{
                         spacing: 20
                         Label{
-                            text: "50"
+                            //text: "50"
+                            id:label_rate
                             font.pointSize: 40
                             width: 200
                             horizontalAlignment: "AlignRight"
@@ -151,12 +166,27 @@ ApplicationWindow {
             }
             //**********************************************
             Column{
-                Button{text: "1";width: 100} Button{text: "2";width: 100} Button{text: "3";width: 100}
-                Button{text: "4";width: 100} Button{text: "5";width: 100} Button{text: "6";width: 100}
-                Button{text: "7";width: 100}
-                Button{text: "save"; id: save;width: 100
-                    onClicked: save.highlighted = ! save.highlighted
+                Label{id:lbe ;text: "Load Recipes:"}
+                Button{text: "A";width: 120; onClicked: if(save.highlighted){rust.save_recipe(0);} else{rust.load_recipe(0);} }
+
+                Button{text: "B";width: 120} Button{text: "C";width: 120}
+                Button{text: "D";width: 120} Button{text: "E";width: 120} Button{text: "F";width: 120}
+                Button{text: "G";width: 120;
+                    onClicked: lbe.text = "1"
+                    ToolTip.visible: pressed
+                    ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+                    ToolTip.text: "aaa"
+                }
+                Button{text: "save"; id: save;width: 120;
+                    onClicked: {
+                        save.highlighted = ! save.highlighted;
+                        if(save.highlighted)
+                        {
+                            lbe.text = "Save Recipes"
+                        }
+                        else{lbe.text = "Load Recipes"}
                     }
+                }
             }
         }
     }

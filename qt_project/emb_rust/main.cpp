@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QtQuickControls2>
 #include "rust.h"
+#include "file_io.h"
 
 int main(int argc, char *argv[])
 {

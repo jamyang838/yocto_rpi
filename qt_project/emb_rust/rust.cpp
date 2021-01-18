@@ -6,7 +6,7 @@ rust::rust(QObject *parent) :
     uart_command(""),
     disable_counter(0)
 {
-    fd = serialOpen ("/dev/ttyUSB0", 57600);
+    fd = serialOpen ("/dev/ttyUSB0", 57600);    
     connect(m_timer,&QTimer::timeout,[=](){
         QString recieved_;
         if(disable_counter != 0)
@@ -25,10 +25,59 @@ rust::rust(QObject *parent) :
     });
     m_timer->start(50);
     //***********************************************
+    status.laser_power = 0;
+    status.laser_frequency = 0;
+    status.scan_width = 0;
+    status.scan_frequency = 0;
+    //***********************************************
     connect(this, &rust::command_signal,[=](QString cmd){
         uart_command = cmd;
     } );
 }
+
+void rust::save_recipe(int index)
+{
+
+    qDebug() << f_io.jsonArray ;
+    qDebug() << "=======================================\n";
+    status.laser_power = 5; //TODO
+
+    f_io.update_recipe(index,status.laser_power, status.laser_frequency, status.scan_frequency, status.scan_width);
+    qDebug() << f_io.jsonArray ;
+    f_io.save_recipes();
+}
+
+void rust::load_recipe(int index)
+{
+    int _power = f_io.get_value(index,f_io.parameter::POWER );
+    int _frequency = f_io.get_value(index,f_io.parameter::FREQUENCY );
+    int _rate = f_io.get_value(index,f_io.parameter::RATE );
+    int _range = f_io.get_value(index,f_io.parameter::RANGE );
+    qDebug() << "ready\n";
+    rust::status_signal(); //TODO
+    uart_command = ""; //TODO
+}
+
+int rust::get_status_power()
+{
+    return  status.laser_power;
+}
+
+int rust::get_status_frequency()
+{
+    return status.laser_frequency;
+}
+
+int rust::get_status_rate()
+{
+    return status.scan_frequency;
+}
+
+int rust::get_status_range()
+{
+    return status.scan_frequency;
+}
+/*
 QString rust::number2Qstring(int numb)
 {
     return QString::number(numb);
@@ -37,6 +86,7 @@ bool rust::get_update_delay()
 {
     return disable_counter != 0 ;
 }
+*/
 bool rust::Status_Check(QList<int> s)
 {
     int first_index = s.indexOf(0xFF);
@@ -85,14 +135,8 @@ void rust::Status_update(QList<int> s)
         int sta = s[2];
 
         status.modulation_on = (sta & 0x20) != 0;
-        /*
-        status.ext_modulation = (sta & 0x40) != 0;
-        status.coded = (sta & 0x04 ) != 0;
-        status.guide_laser = (sta & 0x10) != 0;
-        status.key = (sta & 0x08) != 0;
-        status.warningcode = s[4];
-        */
-        status_signal(status.laser_power, status.laser_frequency, status.scan_width, status.scan_frequency, status.modulation_on);
+
+        status_signal();
         enable_signal(true);
         disable_counter = 0;
     }
@@ -104,13 +148,13 @@ void rust::Status_update(QList<int> s)
     {
         if(disable_counter > 5 )
         {
-            enable_signal(false);
+            enable_signal(false);            
         }
         else
         {
             disable_counter++;
         }
-    }
+    }    
 }
 
 QString rust::UART_Qeury(QString command)

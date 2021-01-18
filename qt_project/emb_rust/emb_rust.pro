@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        file_io.cpp \
         main.cpp \
         rust.cpp
 
@@ -35,6 +36,8 @@ DISTFILES += \
     font/AnjaliOldLipi.ttf
 
 HEADERS += \
+    config.h \
+    file_io.h \
     rust.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../opt/example-distro/sdkversion/sysroots/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/usr/lib/release/ -lwiringPi
