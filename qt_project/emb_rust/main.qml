@@ -167,34 +167,33 @@ ApplicationWindow {
             Column{
                 Label{id:lbe ;text: "Load Recipes:"}
                 Button{text: "A";width: 120;id:btn_a;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(0); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(0); btn_a.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(0);save.highlighted = false;} else{rust.load_recipe(0);} }} }
                 Button{text: "B";width: 120;id:btn_b;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(1); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(1); btn_b.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(1);save.highlighted = false;} else{rust.load_recipe(1);} }}}
                 Button{text: "C";width: 120;id:btn_c;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(2); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(2); btn_c.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(2);save.highlighted = false;} else{rust.load_recipe(2);} }}}
                 Button{text: "D";width: 120;id:btn_d;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(3);btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(3);btn_d.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(3);save.highlighted = false;} else{rust.load_recipe(3);} }}}
                 Button{text: "E";width: 120;id:btn_e;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(4); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(4); btn_e.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(4);save.highlighted = false;} else{rust.load_recipe(4);} }}}
                 Button{text: "F";width: 120; id: btn_f;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(5);btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(5);btn_f.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(5);save.highlighted = false;} else{rust.load_recipe(5);} }}}
                 Button{text: "G";width: 120; id: btn_g;
                     ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(6); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(6); save.highlighted = false;} else{rust.load_recipe(6);} }}}
                 //save********************************
-                Button{text: "save"; id: save;width: 120;
+                Button{text: "save"; id: save;width: 120;                    
                     onClicked: {
-                        save.highlighted = ! save.highlighted;
-                        if(save.highlighted)
-                        {
-                            lbe.text = "Save Recipes"
-                        }
+                        save.highlighted = ! save.highlighted;                                                
+                    }
+                    onHighlightedChanged: {
+                        if(highlighted) { lbe.text = "Save Recipes" }
                         else{lbe.text = "Load Recipes"}
                     }
                 }
