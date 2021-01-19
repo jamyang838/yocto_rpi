@@ -6,7 +6,7 @@
 #define DEF_FREQUENCY   150
 
 #define MIN_POWER   0
-#define MAX_POWER   0
+#define MAX_POWER   100
 #define DEF_POWER   100
 
 #define MIN_SCAN_RATE   0

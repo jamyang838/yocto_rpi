@@ -25,6 +25,11 @@ ApplicationWindow {
             else{main_window.opacity = 0.2;
             }
         }
+        onChange_keyboard: {
+            number_area.text =rust.get_kb_value();
+            kb_ok.enabled = rust.is_kb_in_range();
+            number_area.color = rust.is_kb_in_range()? "white" : "red";
+        }
     }
 
     Column{
@@ -39,8 +44,8 @@ ApplicationWindow {
                 columns: 2
                 //**********************************************
                 Button{
-                    onClicked: popup.open(); Layout.fillHeight: true;Layout.fillWidth: true;
-                    contentItem: Column{
+                    onClicked:{rust.start_popup(0); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                    Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
                         Layout.fillWidth: true
@@ -62,16 +67,10 @@ ApplicationWindow {
                             font.pointSize: 20
                         }
                     }
-                    Rectangle{
-                        width: 280
-                        height: 5
-                        color: "orange"
-                    }
-                }
-            }
+                    Rectangle{width: 280;height: 5;color: "orange"}}}
                 Button{
-                onClicked: popup.open(); Layout.fillHeight: true;Layout.fillWidth: true;
-                contentItem: Column{
+                onClicked:{rust.start_popup(1); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
                         Layout.fillWidth: true
@@ -101,8 +100,8 @@ ApplicationWindow {
                 }
             }
                 Button{
-                onClicked: popup.open(); Layout.fillHeight: true;Layout.fillWidth: true;
-                contentItem: Column{
+                onClicked:{rust.start_popup(2); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
                         Layout.fillWidth: true
@@ -132,8 +131,8 @@ ApplicationWindow {
                 }
             }
                 Button{
-                onClicked: popup.open(); Layout.fillHeight: true;Layout.fillWidth: true;
-                contentItem: Column{
+                onClicked:{rust.start_popup(3); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                Layout.fillHeight: true;Layout.fillWidth: true;contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
                         Layout.fillWidth: true
@@ -167,16 +166,28 @@ ApplicationWindow {
             //**********************************************
             Column{
                 Label{id:lbe ;text: "Load Recipes:"}
-                Button{text: "A";width: 120; onClicked: if(save.highlighted){rust.save_recipe(0);} else{rust.load_recipe(0);} }
-
-                Button{text: "B";width: 120} Button{text: "C";width: 120}
-                Button{text: "D";width: 120} Button{text: "E";width: 120} Button{text: "F";width: 120}
-                Button{text: "G";width: 120;
-                    onClicked: lbe.text = "1"
-                    ToolTip.visible: pressed
-                    ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-                    ToolTip.text: "aaa"
-                }
+                Button{text: "A";width: 120;id:btn_a;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(0); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(0);save.highlighted = false;} else{rust.load_recipe(0);} }} }
+                Button{text: "B";width: 120;id:btn_b;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(1); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(1);save.highlighted = false;} else{rust.load_recipe(1);} }}}
+                Button{text: "C";width: 120;id:btn_c;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(2); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(2);save.highlighted = false;} else{rust.load_recipe(2);} }}}
+                Button{text: "D";width: 120;id:btn_d;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(3);btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(3);save.highlighted = false;} else{rust.load_recipe(3);} }}}
+                Button{text: "E";width: 120;id:btn_e;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(4); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(4);save.highlighted = false;} else{rust.load_recipe(4);} }}}
+                Button{text: "F";width: 120; id: btn_f;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(5);btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(5);save.highlighted = false;} else{rust.load_recipe(5);} }}}
+                Button{text: "G";width: 120; id: btn_g;
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(6); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                                rust.save_recipe(6); save.highlighted = false;} else{rust.load_recipe(6);} }}}
+                //save********************************
                 Button{text: "save"; id: save;width: 120;
                     onClicked: {
                         save.highlighted = ! save.highlighted;
@@ -190,8 +201,10 @@ ApplicationWindow {
             }
         }
     }
-       Popup {
+    Popup {
            id: popup
+           x: 200
+           y: 50
            //width: 500
            //height: parent.height
            modal: true
@@ -200,7 +213,8 @@ ApplicationWindow {
 
           Column{
                TextArea{
-                   text: "1234"
+                   id: number_area
+                   text: "0"
                    font.pointSize: 45
                    horizontalAlignment: "AlignRight"
                    width: parent.width
@@ -212,28 +226,29 @@ ApplicationWindow {
                    id: grid
                    columns: 4
 
-                   Button {text: "7";onClicked: popup.open();}
-                   Button {text: "8";onClicked: popup.open();}
-                   Button {text: "9";onClicked: popup.open();}
-                   Button {text: "DEL";onClicked: popup.open();}
+                   Button {text: "7";onClicked: {rust.insert_keyboard_value(7);rust.change_keyboard(); }}
+                   Button {text: "8";onClicked: {rust.insert_keyboard_value(8);rust.change_keyboard(); }}
+                   Button {text: "9";onClicked: {rust.insert_keyboard_value(9);rust.change_keyboard(); }}
+                   Button {text: "DEL";onClicked: {rust.delete_keyboard_value(); rust.change_keyboard();}}
 
-                   Button {text: "4";onClicked: popup.open();}
-                   Button {text: "5";onClicked: popup.open();}
-                   Button {text: "6";onClicked: popup.open();}
-                   Button {text: "C";onClicked: popup.open(); }
+                   Button {text: "4";onClicked: {rust.insert_keyboard_value(4);rust.change_keyboard(); }}
+                   Button {text: "5";onClicked: {rust.insert_keyboard_value(5);rust.change_keyboard(); }}
+                   Button {text: "6";onClicked: {rust.insert_keyboard_value(6);rust.change_keyboard(); }}
+                   Button {text: "C";onClicked: {  rust.clear_keyboard_value(); rust.change_keyboard(); } }
 
-                   Button {text: "1";onClicked: popup.open();}
-                   Button {text: "2";onClicked: popup.open();}
-                   Button {text: "3";onClicked: popup.open();}
-                   Button {text: "OK";onClicked: popup.close();
+                   Button {text: "1";onClicked: {rust.insert_keyboard_value(1);rust.change_keyboard(); }}
+                   Button {text: "2";onClicked: {rust.insert_keyboard_value(2);rust.change_keyboard(); }}
+                   Button {text: "3";onClicked: {rust.insert_keyboard_value(3);rust.change_keyboard(); }}
+                   Button {text: "OK";id:kb_ok ;onClicked: {rust.kb_ok(); popup.close();}
                        Layout.rowSpan: 2; Layout.fillHeight: true;}
 
-                   Button {text: "0";onClicked: popup.open();}
-                   Button {text: "Cancel";onClicked: popup.open();}
+                   Button {text: "0"; onClicked: {rust.insert_keyboard_value(0);rust.change_keyboard(); }}
+                   Button {text: "Cancel" ; Layout.columnSpan: 2 ;onClicked: popup.close()}
 
                }
                Label{
-                   text: "POWER"
+                   text: "--"
+                   id:label_kb
                    font.pointSize: 20
                    horizontalAlignment:"AlignRight"
                    width: parent.width

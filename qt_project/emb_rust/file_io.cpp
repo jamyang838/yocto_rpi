@@ -21,6 +21,8 @@ void file_io::save_recipes()
     std::ofstream ofs(FILE_NAME);
     ofs << strJson.toStdString().data();
     ofs.close();
+
+    get_Jsonfile();
 }
 
 void file_io::initial_recipes()
@@ -38,7 +40,7 @@ void file_io::initial_recipes()
 
     if(QFileInfo(FILE_NAME).exists()){
         //The file exists
-
+        get_Jsonfile();
     }
     else{
         save_recipes();
@@ -54,6 +56,7 @@ void file_io::update_recipe(int index, int power, int frequency, int rate, int r
         if(i == index)
         {
            _obj.insert(convert_parameter_tostring(parameter::POWER), power);
+            //_obj.insert(convert_parameter_tostring(parameter::POWER), 777);
            _obj.insert(convert_parameter_tostring(parameter::FREQUENCY), frequency);
            _obj.insert(convert_parameter_tostring(parameter::RATE), rate);
            _obj.insert(convert_parameter_tostring(parameter::RANGE), range);
@@ -108,4 +111,17 @@ QString file_io::convert_parameter_tostring(parameter p)
         break;
     }
     return result;
+}
+
+void file_io::get_Jsonfile()
+{
+    QFile savefile(FILE_NAME);
+    savefile.open(QIODevice::ReadOnly);
+    QTextStream in(&savefile);
+    QString strReply = in.readAll();
+    QStringList propertyNames;
+    QStringList propertyKeys;
+    //QString strReply = (QString)reply->readAll();
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+    jsonArray = jsonResponse.array();
 }

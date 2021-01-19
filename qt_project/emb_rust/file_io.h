@@ -30,6 +30,7 @@ private:
 
     bool is_valid(parameter p, int value);
     QString convert_parameter_tostring(parameter p);
+    void get_Jsonfile();
 };
 
 #endif // FILE_IO_H
