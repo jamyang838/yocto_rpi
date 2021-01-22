@@ -72,7 +72,7 @@ int rust::get_status_rate()
 
 int rust::get_status_range()
 {
-    return status.scan_frequency;
+    return status.scan_width;
 }
 
 QString rust::get_quick_msg(int index)
@@ -185,16 +185,16 @@ void rust::start_popup(int index)
         kb.value = status.laser_frequency;
         break;
     case 2:
-        kb.title = file_io::parameter::RATE;
-        kb.max_value = MAX_SCAN_RATE;
-        kb.min_value = MIN_SCAN_RATE;
-        kb.value = status.scan_frequency;
-        break;
-    case 3:
         kb.title = file_io::parameter::RANGE;
         kb.max_value = MAX_SCAN_RANGE;
         kb.min_value = MIN_SCAN_RANGE;
         kb.value = status.scan_width;
+        break;
+    case 3:
+        kb.title = file_io::parameter::RATE;
+        kb.max_value = MAX_SCAN_RATE;
+        kb.min_value = MIN_SCAN_RATE;
+        kb.value = status.scan_frequency;
         break;
     default:
         break;

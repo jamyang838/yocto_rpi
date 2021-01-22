@@ -100,37 +100,6 @@ ApplicationWindow {
                 }
             }
                 Button{
-                onClicked:{rust.start_popup(2); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
-                Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
-                    anchors.bottom: parent.bottom
-                    Label{
-                        Layout.fillWidth: true
-                        text: "SCAN RANGE"
-                        font.pointSize: 20
-                        horizontalAlignment: "AlignHCenter"
-                    }
-                    Row{
-                        spacing: 20
-                        Label{
-                            //text: "8"
-                            id:label_range
-                            font.pointSize: 40
-                            width: 200
-                            horizontalAlignment: "AlignRight"
-                        }
-                        Label{
-                            text: "cm"
-                            font.pointSize: 20
-                        }
-                    }
-                    Rectangle{
-                        width: 280
-                        height: 5
-                        color: "orange"
-                    }
-                }
-            }
-                Button{
                 onClicked:{rust.start_popup(3); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
                 Layout.fillHeight: true;Layout.fillWidth: true;contentItem: Column{
                     anchors.bottom: parent.bottom
@@ -161,6 +130,40 @@ ApplicationWindow {
                     }
                 }
                 }
+                Button{
+                onClicked:{
+                    rust.start_popup(2);
+                    label_kb.text = rust.get_kb_title() ;
+                    rust.change_keyboard();
+                    popup.open();}
+                Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
+                    anchors.bottom: parent.bottom
+                    Label{
+                        Layout.fillWidth: true
+                        text: "SCAN RANGE"
+                        font.pointSize: 20
+                        horizontalAlignment: "AlignHCenter"
+                    }
+                    Row{
+                        spacing: 20
+                        Label{
+                            id:label_range
+                            font.pointSize: 40
+                            width: 200
+                            horizontalAlignment: "AlignRight"
+                        }
+                        Label{
+                            text: "cm"
+                            font.pointSize: 20
+                        }
+                    }
+                    Rectangle{
+                        width: 280
+                        height: 5
+                        color: "orange"
+                    }
+                }
+            }
                 //**********************************************
             }
             //**********************************************
