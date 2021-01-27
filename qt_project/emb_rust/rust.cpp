@@ -3,8 +3,9 @@
 rust::rust(QObject *parent) :
     QObject(parent),
     m_timer(new QTimer()),
-    uart_command(""),
-    disable_counter(0)
+    uart_command(""),    
+    disable_counter(0),
+    locked(false)
 {
     fd = serialOpen ("/dev/ttyUSB0", 57600);
     connect(m_timer,&QTimer::timeout,[=](){
@@ -200,6 +201,16 @@ void rust::start_popup(int index)
         break;
     }
 
+}
+
+void rust::button_lock(bool checked)
+{
+    locked = !checked;
+}
+
+bool rust::get_locked()
+{
+    return locked;
 }
 
 bool rust::Status_Check(QList<int> s)

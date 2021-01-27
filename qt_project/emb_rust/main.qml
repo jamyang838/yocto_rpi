@@ -33,9 +33,30 @@ ApplicationWindow {
     }
 
     Column{
-        spacing: 10
-        id: main_window
-        Label{text: ""; font.pointSize: 30; width: 640; horizontalAlignment: "AlignHCenter"; height: 30}
+        spacing: 10        
+        id: main_window        
+        DelayButton{
+            id: control
+            width: parent.width
+            height: 30
+            text: "Unlocked"
+            delay: 1000
+            Material.theme : Material.Dark;
+            Material.accent: Material.Red
+            checked: true;
+            onCheckedChanged: {
+                rust.button_lock(checked);
+                if(checked)
+                {
+                    text = "Unlocked";
+                    Material.theme = Material.Dark;
+                }
+                else{
+                    text = "Locked";
+                    Material.theme = Material.Light;
+                }
+            }
+        }
         Row{
             spacing: 50
             GridLayout{
@@ -44,7 +65,7 @@ ApplicationWindow {
                 columns: 2
                 //**********************************************
                 Button{
-                    onClicked:{rust.start_popup(0); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                    onClicked:{ if( rust.get_locked() ) return; rust.start_popup(0); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
                     Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
@@ -69,7 +90,7 @@ ApplicationWindow {
                     }
                     Rectangle{width: 280;height: 5;color: "orange"}}}
                 Button{
-                onClicked:{rust.start_popup(1); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                onClicked:{if( rust.get_locked() ) return;rust.start_popup(1); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
                 Layout.fillHeight: true;Layout.fillWidth: true; contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
@@ -100,7 +121,7 @@ ApplicationWindow {
                 }
             }
                 Button{
-                onClicked:{rust.start_popup(3); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
+                onClicked:{if( rust.get_locked() ) return;rust.start_popup(3); label_kb.text = rust.get_kb_title() ; rust.change_keyboard(); popup.open();}
                 Layout.fillHeight: true;Layout.fillWidth: true;contentItem: Column{
                     anchors.bottom: parent.bottom
                     Label{
@@ -131,7 +152,7 @@ ApplicationWindow {
                 }
                 }
                 Button{
-                onClicked:{
+                onClicked:{ if( rust.get_locked() ) return;
                     rust.start_popup(2);
                     label_kb.text = rust.get_kb_title() ;
                     rust.change_keyboard();
@@ -170,29 +191,29 @@ ApplicationWindow {
             Column{
                 Label{id:lbe ;text: "Load Recipes:"}
                 Button{text: "A";width: 120;id:btn_a;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(0); btn_a.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(0); btn_a.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(0);save.highlighted = false;} else{rust.load_recipe(0);} }} }
                 Button{text: "B";width: 120;id:btn_b;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(1); btn_b.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(1); btn_b.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(1);save.highlighted = false;} else{rust.load_recipe(1);} }}}
                 Button{text: "C";width: 120;id:btn_c;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(2); btn_c.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(2); btn_c.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(2);save.highlighted = false;} else{rust.load_recipe(2);} }}}
                 Button{text: "D";width: 120;id:btn_d;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(3);btn_d.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(3);btn_d.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(3);save.highlighted = false;} else{rust.load_recipe(3);} }}}
                 Button{text: "E";width: 120;id:btn_e;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(4); btn_e.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(4); btn_e.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(4);save.highlighted = false;} else{rust.load_recipe(4);} }}}
                 Button{text: "F";width: 120; id: btn_f;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(5);btn_f.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: { ToolTip.text = rust.get_quick_msg(5);btn_f.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(5);save.highlighted = false;} else{rust.load_recipe(5);} }}}
                 Button{text: "G";width: 120; id: btn_g;
-                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(6); btn_g.flat = ToolTip.visible;} onClicked: {if(!ToolTip.visible) {if(save.highlighted){
+                    ToolTip.visible: pressed;ToolTip.delay: 500; ToolTip.onVisibleChanged: {ToolTip.text = rust.get_quick_msg(6); btn_g.flat = ToolTip.visible;} onClicked: {if( rust.get_locked() ) return;if(!ToolTip.visible) {if(save.highlighted){
                                 rust.save_recipe(6); save.highlighted = false;} else{rust.load_recipe(6);} }}}
                 //save********************************
                 Button{text: "save"; id: save;width: 120;                    
-                    onClicked: {
+                    onClicked: {if( rust.get_locked() ) return;
                         save.highlighted = ! save.highlighted;                                                
                     }
                     onHighlightedChanged: {

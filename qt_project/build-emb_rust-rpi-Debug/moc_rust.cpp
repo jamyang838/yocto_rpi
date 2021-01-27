@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_rust_t {
-    QByteArrayData data[25];
-    char stringdata0[318];
+    QByteArrayData data[28];
+    char stringdata0[349];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -55,7 +55,10 @@ QT_MOC_LITERAL(20, 259, 12), // "get_kb_value"
 QT_MOC_LITERAL(21, 272, 14), // "is_kb_in_range"
 QT_MOC_LITERAL(22, 287, 12), // "get_kb_title"
 QT_MOC_LITERAL(23, 300, 5), // "kb_ok"
-QT_MOC_LITERAL(24, 306, 11) // "start_popup"
+QT_MOC_LITERAL(24, 306, 11), // "start_popup"
+QT_MOC_LITERAL(25, 318, 11), // "button_lock"
+QT_MOC_LITERAL(26, 330, 7), // "checked"
+QT_MOC_LITERAL(27, 338, 10) // "get_locked"
 
     },
     "rust\0status_signal\0\0enable_signal\0enb\0"
@@ -67,7 +70,8 @@ QT_MOC_LITERAL(24, 306, 11) // "start_popup"
     "value\0clear_keyboard_value\0"
     "delete_keyboard_value\0get_kb_value\0"
     "is_kb_in_range\0get_kb_title\0kb_ok\0"
-    "start_popup"
+    "start_popup\0button_lock\0checked\0"
+    "get_locked"
 };
 #undef QT_MOC_LITERAL
 
@@ -77,7 +81,7 @@ static const uint qt_meta_data_rust[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      19,   14, // methods
+      21,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -85,27 +89,29 @@ static const uint qt_meta_data_rust[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  109,    2, 0x06 /* Public */,
-       3,    1,  110,    2, 0x06 /* Public */,
-       5,    1,  113,    2, 0x06 /* Public */,
-       7,    0,  116,    2, 0x06 /* Public */,
+       1,    0,  119,    2, 0x06 /* Public */,
+       3,    1,  120,    2, 0x06 /* Public */,
+       5,    1,  123,    2, 0x06 /* Public */,
+       7,    0,  126,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    1,  117,    2, 0x0a /* Public */,
-      10,    1,  120,    2, 0x0a /* Public */,
-      11,    0,  123,    2, 0x0a /* Public */,
-      12,    0,  124,    2, 0x0a /* Public */,
-      13,    0,  125,    2, 0x0a /* Public */,
-      14,    0,  126,    2, 0x0a /* Public */,
-      15,    1,  127,    2, 0x0a /* Public */,
-      16,    1,  130,    2, 0x0a /* Public */,
-      18,    0,  133,    2, 0x0a /* Public */,
-      19,    0,  134,    2, 0x0a /* Public */,
-      20,    0,  135,    2, 0x0a /* Public */,
-      21,    0,  136,    2, 0x0a /* Public */,
-      22,    0,  137,    2, 0x0a /* Public */,
-      23,    0,  138,    2, 0x0a /* Public */,
-      24,    1,  139,    2, 0x0a /* Public */,
+       8,    1,  127,    2, 0x0a /* Public */,
+      10,    1,  130,    2, 0x0a /* Public */,
+      11,    0,  133,    2, 0x0a /* Public */,
+      12,    0,  134,    2, 0x0a /* Public */,
+      13,    0,  135,    2, 0x0a /* Public */,
+      14,    0,  136,    2, 0x0a /* Public */,
+      15,    1,  137,    2, 0x0a /* Public */,
+      16,    1,  140,    2, 0x0a /* Public */,
+      18,    0,  143,    2, 0x0a /* Public */,
+      19,    0,  144,    2, 0x0a /* Public */,
+      20,    0,  145,    2, 0x0a /* Public */,
+      21,    0,  146,    2, 0x0a /* Public */,
+      22,    0,  147,    2, 0x0a /* Public */,
+      23,    0,  148,    2, 0x0a /* Public */,
+      24,    1,  149,    2, 0x0a /* Public */,
+      25,    1,  152,    2, 0x0a /* Public */,
+      27,    0,  155,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -129,6 +135,8 @@ static const uint qt_meta_data_rust[] = {
     QMetaType::QString,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::Bool,   26,
+    QMetaType::Bool,
 
        0        // eod
 };
@@ -166,6 +174,9 @@ void rust::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 17: _t->kb_ok(); break;
         case 18: _t->start_popup((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: _t->button_lock((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: { bool _r = _t->get_locked();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -226,13 +237,13 @@ int rust::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 21)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 21;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 21)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 19;
+        _id -= 21;
     }
     return _id;
 }

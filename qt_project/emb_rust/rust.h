@@ -58,6 +58,8 @@ public slots:
     void kb_ok();
     void start_popup(int index);
     //**********************************************************
+    void button_lock(bool checked);
+    bool get_locked();
 
 signals:
     void status_signal();
@@ -72,6 +74,7 @@ private:
     int fd;    
     bool Status_Check(QList<int> s);
     void Status_update(QList<int> s);
+    bool locked;
 
     QString UART_Qeury(QString uart_command);
 };
